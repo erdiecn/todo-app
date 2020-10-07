@@ -1,4 +1,5 @@
 # oi2-todo
+<<<<<<< HEAD
 
 ## Project setup
 ```
@@ -22,3 +23,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+Todos
+>>>>>>> b3274ed7c444fe910eb883dbaaac24005d593c9e
