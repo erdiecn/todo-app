@@ -12,6 +12,7 @@
             v-on:delete-item="deleteItem(item.id)"
           />
         </div>
+        <div><AddListItem v-on:addNewItem="addItem"/></div>
       </div>
     </div>
   </section>
@@ -19,6 +20,7 @@
 
 <script>
 import ListItem from "./ListItem";
+import AddListItem from "./AddListItem";
 
 export default {
   name: "List",
@@ -26,7 +28,8 @@ export default {
     title: String
   },
   components: {
-    ListItem
+    ListItem,
+    AddListItem
   },
   data: () => {
     return {
@@ -54,6 +57,9 @@ export default {
         return obj;
       });
       console.log("Almost deleted", id);
+    },
+    addItem(newItem){
+      this.listItems = [...this.listItems, newItem];
     }
   }
 };
