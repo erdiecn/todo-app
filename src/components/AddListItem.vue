@@ -1,7 +1,7 @@
 <template>
   <div>
     <input v-model="newItem" placeholder="Add new Todo!">
-    <button v-on:click="getNewItem(newItem)">+</button>
+    <button v-on:click="getNewItem()">+</button>
   </div>
   
 </template>
@@ -13,14 +13,15 @@ export default {
     // itemText: String,
     // itemId: Number
   },
+  data() {
+      return {
+          newItem: "",
+      }
+  },
   methods: {
-    getNewItem: function(newItemText){
-        const newItem = {
-            id: 5,
-            itemText: newItemText,
-            active: true
-        }
-        this.$emit("addNewItem", newItem);
+    getNewItem: function(){
+        this.$emit("addNewItem", this.newItem);
+        this.newItem = "";
     }
   }
 };

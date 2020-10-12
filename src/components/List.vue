@@ -58,7 +58,9 @@ export default {
       });
       console.log("Almost deleted", id);
     },
-    addItem(newItem){
+    addItem(itemText){
+      const id = this.listItems[this.listItems.length - 1].id + 1;
+      const newItem = {itemText, active:true, id}
       this.listItems = [...this.listItems, newItem];
     }
   }
