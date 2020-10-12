@@ -9,10 +9,13 @@
             :key="item.id"
             :itemText="item.itemText"
             :itemId="item.id"
+            :itemComplete="item.completed"
             v-on:delete-item="deleteItem(item.id)"
           />
         </div>
-        <div><AddListItem v-on:addNewItem="addItem"/></div>
+        <div>
+          <AddListItem v-on:addNewItem="addItem" />
+        </div>
       </div>
     </div>
   </section>
@@ -34,10 +37,10 @@ export default {
   data: () => {
     return {
       listItems: [
-        { id: 1, itemText: "Wash the dishes", active: true },
-        { id: 2, itemText: "Pick up toys", active: true },
-        { id: 3, itemText: "Laundry", active: true },
-        { id: 4, itemText: "Walk the dog", active: true }
+        { id: 1, itemText: "Wash the dishes", active: true, completed: false },
+        { id: 2, itemText: "Pick up toys", active: true, completed: false },
+        { id: 3, itemText: "Laundry", active: true, completed: false },
+        { id: 4, itemText: "Walk the dog", active: true, completed: true }
       ]
     };
   },
@@ -58,9 +61,9 @@ export default {
       });
       console.log("Almost deleted", id);
     },
-    addItem(itemText){
+    addItem(itemText) {
       const id = this.listItems[this.listItems.length - 1].id + 1;
-      const newItem = {itemText, active:true, id}
+      const newItem = { itemText, active: true, id };
       this.listItems = [...this.listItems, newItem];
     }
   }
