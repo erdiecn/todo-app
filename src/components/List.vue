@@ -40,7 +40,7 @@ export default {
         { id: 1, itemText: "Wash the dishes", active: true, completed: false },
         { id: 2, itemText: "Pick up toys", active: true, completed: false },
         { id: 3, itemText: "Laundry", active: true, completed: false },
-        { id: 4, itemText: "Walk the dog", active: true, completed: true }
+        { id: 4, itemText: "Walk the dog", active: true, completed: false }
       ]
     };
   },
