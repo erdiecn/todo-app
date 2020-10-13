@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div v-bind:class="{'is-complete':isComplete}">
     <p>
-      <font-awesome-icon :icon="['far', 'square']" />
+      <button @click="isComplete = !isComplete">
+        <font-awesome-icon :icon="['far', 'square']" v-if="isComplete == false" />
+        <font-awesome-icon :icon="['fas', 'square']" v-else />
+      </button>
+      
       {{ itemText }}
       <button v-on:click="deactivate(itemId)">X</button>
     </p>
@@ -15,6 +19,12 @@ export default {
     itemText: String,
     itemId: Number
   },
+  data(){
+    return {
+      isComplete: false,
+    }
+    
+  },
   methods: {
     deactivate: function(itemId) {
       console.log("deleted", itemId);
@@ -25,4 +35,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+  .is-complete{
+    text-decoration: line-through;
+  }
+
+</style>

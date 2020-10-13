@@ -2,10 +2,11 @@ import Vue from "vue";
 import App from "./App.vue";
 import "bulma/css/bulma.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSquare } from "@fortawesome/free-regular-svg-icons";
+import { faSquare as farSquare } from "@fortawesome/free-regular-svg-icons";
+import { faSquare as fasSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faSquare);
+library.add(farSquare, fasSquare);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
