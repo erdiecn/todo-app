@@ -1,16 +1,19 @@
 <template>
     <div>
+        <AddList v-on:addNewList="addList" />
         <List 
-            v-for="list in lists"
+            v-for="list in activeLists"
             :key="list.id"
             :listId="list.id"
             :listTitle="list.title"
+            v-on:delete-list="deleteList(list.id)"
         />
     </div>
 </template>
 
 <script>
 import List from "./List";
+import AddList from "./AddList";
 
 export default {
   name: "Dashboard",
@@ -18,31 +21,28 @@ export default {
     // title: String
   },
   components: {
-    List
+    List,
+    AddList
   },
   data: () => {
     return {
       lists: [
-          {id: 1, title: "Chores1"},
-          {id: 2, title: "Chores2"},
-          {id: 3, title: "Chores3"},
-        // { id: 1, itemText: "Wash the dishes", active: true },
-        // { id: 2, itemText: "Pick up toys", active: true },
-        // { id: 3, itemText: "Laundry", active: true },
-        // { id: 4, itemText: "Walk the dog", active: true }
+          {id: 1, title: "Chores1", active: true},
+        //   {id: 2, title: "Chores2", active: true},
+        //   {id: 3, title: "Chores3", active: true},
       ]
     };
   },
   computed: {
-    activeItems() {
-      return this.listItems.filter(item => {
-        return item.active;
+    activeLists() {
+      return this.lists.filter(list => {
+        return list.active;
       });
     }
   },
   methods: {
-    deleteItem(id) {
-      this.listItems = this.listItems.map(obj => {
+    deleteList(id) {
+      this.lists = this.lists.map(obj => {
         if (obj.id == id) {
           obj.active = false;
         }
@@ -50,11 +50,12 @@ export default {
       });
       console.log("Almost deleted", id);
     },
-    addItem(itemText){
-      const id = this.listItems[this.listItems.length - 1].id + 1;
-      const newItem = {itemText, active:true, id}
-      this.listItems = [...this.listItems, newItem];
+    addList(listTitle){
+      const id = this.lists.length !== 0 ? this.lists[this.lists.length - 1].id + 1 : 0;
+      const newList = {title:listTitle, active:true, id};
+      this.lists = [...this.lists, newList];
     }
+
   }
 };
 </script>

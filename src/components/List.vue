@@ -1,7 +1,13 @@
 <template>
   <section class="section">
     <div class="container">
+      <span>
+        <button v-on:click="deactivateList(listId)">X</button>
+      </span>
       <h1 class="title">{{listTitle}}</h1>
+      
+      
+      
       <div class="content">
         <div>
           <ListItem
@@ -63,7 +69,14 @@ export default {
       const id = this.listItems.length !== 0 ? this.listItems[this.listItems.length - 1].id + 1 : 0;
       const newItem = {itemText, active:true, id}
       this.listItems = [...this.listItems, newItem];
-    }
+    },
+    deactivateList: function(listId){
+      console.log("deleted", listId);
+      this.$emit("delete-list");
+    },
+    // renameList: function(listId){
+
+    // }
   }
 };
 </script>

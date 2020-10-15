@@ -3,7 +3,8 @@ import App from "./App.vue";
 import "bulma/css/bulma.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSquare as farSquare } from "@fortawesome/free-regular-svg-icons";
-import { faSquare as fasSquare } from '@fortawesome/free-solid-svg-icons'
+import { faSquare as fasSquare } from '@fortawesome/free-solid-svg-icons';
+// import { faPen as fasPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(farSquare, fasSquare);
