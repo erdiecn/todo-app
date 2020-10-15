@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <List title="Chores" />
+    <Dashboard />
   </div>
 </template>
 
 <script>
-import List from "./components/List.vue";
+import Dashboard from "./components/Dashboard.vue";
 
 export default {
   name: "App",
   components: {
-    List
+    Dashboard
   }
 };
 </script>

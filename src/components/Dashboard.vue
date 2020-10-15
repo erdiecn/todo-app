@@ -1,40 +1,31 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">{{listTitle}}</h1>
-      <div class="content">
-        <div>
-          <ListItem
-            v-for="item in activeItems"
-            :key="item.id"
-            :itemText="item.itemText"
-            :itemId="item.id"
-            v-on:delete-item="deleteItem(item.id)"
-          />
-        </div>
-        <div><AddListItem v-on:addNewItem="addItem"/></div>
-      </div>
+    <div>
+        <List 
+            v-for="list in lists"
+            :key="list.id"
+            :listId="list.id"
+            :listTitle="list.title"
+        />
     </div>
-  </section>
 </template>
 
 <script>
-import ListItem from "./ListItem";
-import AddListItem from "./AddListItem";
+import List from "./List";
 
 export default {
-  name: "List",
+  name: "Dashboard",
   props: {
-    listTitle: String,
-    listId: Number,
+    // title: String
   },
   components: {
-    ListItem,
-    AddListItem
+    List
   },
   data: () => {
     return {
-      listItems: [
+      lists: [
+          {id: 1, title: "Chores1"},
+          {id: 2, title: "Chores2"},
+          {id: 3, title: "Chores3"},
         // { id: 1, itemText: "Wash the dishes", active: true },
         // { id: 2, itemText: "Pick up toys", active: true },
         // { id: 3, itemText: "Laundry", active: true },
@@ -60,7 +51,7 @@ export default {
       console.log("Almost deleted", id);
     },
     addItem(itemText){
-      const id = this.listItems.length !== 0 ? this.listItems[this.listItems.length - 1].id + 1 : 0;
+      const id = this.listItems[this.listItems.length - 1].id + 1;
       const newItem = {itemText, active:true, id}
       this.listItems = [...this.listItems, newItem];
     }
