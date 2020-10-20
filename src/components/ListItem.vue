@@ -1,23 +1,18 @@
 <template>
-  <div>
-    <div class="todo-item" v-bind:class="{ 'is-complete': itemComplete }">
-      <label class="container">
-        <input type="checkbox" v-on:click="markComplete" />
-        <span class="checkmark"></span>
-      </label>
-      <!-- <font-awesome-icon :icon="['far', 'square']" class="check-incomplete" /> -->
-      {{ itemText }}
-      <!-- <button class="button is-success is-light" id="complete-button">
-        <font-awesome-icon :icon="['far', 'check-square']" class="check-complete" />
-      </button>-->
-      <button
-        class="button is-danger is-light"
-        id="delete-button"
-        v-on:click="deactivate(itemId)"
-      >
-        X
+  <div v-bind:class="{ 'is-complete': isComplete }">
+    <p>
+      <button @click="isComplete = !isComplete">
+        <font-awesome-icon
+          :icon="['far', 'square']"
+          v-if="isComplete == false"
+        />
+        <font-awesome-icon :icon="['fas', 'square']" v-else />
       </button>
-    </div>
+
+      {{ itemText }}
+
+      <button v-on:click="deactivate(itemId)">X</button>
+    </p>
   </div>
 </template>
 
@@ -26,8 +21,13 @@ export default {
   name: "ListItem",
   props: {
     itemText: String,
-    itemId: Number,
-    itemComplete: Boolean
+    itemId: Number
+    // listTitle: String,
+  },
+  data() {
+    return {
+      isComplete: false
+    };
   },
   methods: {
     deactivate: function(itemId) {

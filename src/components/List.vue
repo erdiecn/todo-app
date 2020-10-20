@@ -1,11 +1,15 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title">{{title}}</h1>
+      <span>
+        <button v-on:click="deactivateList(listId)">X</button>
+      </span>
+      <h1 class="title">{{ listTitle }}</h1>
+
       <div class="content">
         <div>
           <ListItem
-            v-for="item in activeItems"
+            v-for="item in listItems"
             :key="item.id"
             :itemText="item.itemText"
             :itemId="item.id"
@@ -13,9 +17,7 @@
             v-on:delete-item="deleteItem(item.id)"
           />
         </div>
-        <div>
-          <AddListItem v-on:addNewItem="addItem" />
-        </div>
+        <div><AddListItem v-on:addNewItem="addItem" /></div>
       </div>
     </div>
   </section>
@@ -28,21 +30,16 @@ import AddListItem from "./AddListItem";
 export default {
   name: "List",
   props: {
-    title: String
+    listTitle: String,
+    listId: Number,
+    listItems: Array
   },
   components: {
     ListItem,
     AddListItem
   },
   data: () => {
-    return {
-      listItems: [
-        { id: 1, itemText: "Wash the dishes", active: true, completed: false },
-        { id: 2, itemText: "Pick up toys", active: true, completed: false },
-        { id: 3, itemText: "Laundry", active: true, completed: false },
-        { id: 4, itemText: "Walk the dog", active: true, completed: false }
-      ]
-    };
+    return {};
   },
   computed: {
     activeItems() {
@@ -62,14 +59,23 @@ export default {
       console.log("Almost deleted", id);
     },
     addItem(itemText) {
-      const id = this.listItems[this.listItems.length - 1].id + 1;
+      const id =
+        this.listItems.length !== 0
+          ? this.listItems[this.listItems.length - 1].id + 1
+          : 0;
       const newItem = { itemText, active: true, id };
       this.listItems = [...this.listItems, newItem];
+    },
+    deactivateList: function(listId) {
+      console.log("deleted", listId);
+      this.$emit("delete-list");
     }
+    // renameList: function(listId){
+
+    // }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>
