@@ -4,21 +4,19 @@
       <span>
         <button v-on:click="deactivateList(listId)">X</button>
       </span>
-      <h1 class="title">{{listTitle}}</h1>
-      
-      
-      
+      <h1 class="title">{{ listTitle }}</h1>
+
       <div class="content">
         <div>
           <ListItem
-            v-for="item in activeItems"
+            v-for="item in listItems"
             :key="item.id"
             :itemText="item.itemText"
             :itemId="item.id"
             v-on:delete-item="deleteItem(item.id)"
           />
         </div>
-        <div><AddListItem v-on:addNewItem="addItem"/></div>
+        <div><AddListItem v-on:addNewItem="addItem" /></div>
       </div>
     </div>
   </section>
@@ -33,31 +31,28 @@ export default {
   props: {
     listTitle: String,
     listId: Number,
+    listItems: Array,
+
   },
   components: {
     ListItem,
-    AddListItem
+    AddListItem,
   },
   data: () => {
     return {
-      listItems: [
-        // { id: 1, itemText: "Wash the dishes", active: true },
-        // { id: 2, itemText: "Pick up toys", active: true },
-        // { id: 3, itemText: "Laundry", active: true },
-        // { id: 4, itemText: "Walk the dog", active: true }
-      ]
+      
     };
   },
   computed: {
     activeItems() {
-      return this.listItems.filter(item => {
+      return this.listItems.filter((item) => {
         return item.active;
       });
-    }
+    },
   },
   methods: {
     deleteItem(id) {
-      this.listItems = this.listItems.map(obj => {
+      this.listItems = this.listItems.map((obj) => {
         if (obj.id == id) {
           obj.active = false;
         }
@@ -65,22 +60,24 @@ export default {
       });
       console.log("Almost deleted", id);
     },
-    addItem(itemText){
-      const id = this.listItems.length !== 0 ? this.listItems[this.listItems.length - 1].id + 1 : 0;
-      const newItem = {itemText, active:true, id}
+    addItem(itemText) {
+      const id =
+        this.listItems.length !== 0
+          ? this.listItems[this.listItems.length - 1].id + 1
+          : 0;
+      const newItem = { itemText, active: true, id };
       this.listItems = [...this.listItems, newItem];
     },
-    deactivateList: function(listId){
+    deactivateList: function (listId) {
       console.log("deleted", listId);
       this.$emit("delete-list");
     },
     // renameList: function(listId){
 
     // }
-  }
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>
