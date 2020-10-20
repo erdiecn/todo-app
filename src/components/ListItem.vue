@@ -1,16 +1,22 @@
 <template>
   <div>
-    <label class="container">
-      <input type="checkbox" v-on:click="markComplete" />
-      <span class="checkmark"></span>
-    </label>
-    <div class="todo-item" v-bind:class="{'is-complete':itemComplete}">
+    <div class="todo-item" v-bind:class="{ 'is-complete': itemComplete }">
+      <label class="container">
+        <input type="checkbox" v-on:click="markComplete" />
+        <span class="checkmark"></span>
+      </label>
       <!-- <font-awesome-icon :icon="['far', 'square']" class="check-incomplete" /> -->
       {{ itemText }}
       <!-- <button class="button is-success is-light" id="complete-button">
         <font-awesome-icon :icon="['far', 'check-square']" class="check-complete" />
       </button>-->
-      <button class="button is-danger is-light" id="delete-button" v-on:click="deactivate(itemId)">X</button>
+      <button
+        class="button is-danger is-light"
+        id="delete-button"
+        v-on:click="deactivate(itemId)"
+      >
+        X
+      </button>
     </div>
   </div>
 </template>
@@ -42,8 +48,8 @@ export default {
 .todo-item {
   height: 55px;
   font-size: 22px;
-  border-style: solid;
-  border-width: 1px;
+  /* border-style: solid;
+  border-width: 1px; */
   padding: 7px;
   padding-left: 50px;
   margin: 5px;
@@ -93,7 +99,7 @@ export default {
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: #8a4d76;
 }
 
 /* When the checkbox is checked, add a blue background */
