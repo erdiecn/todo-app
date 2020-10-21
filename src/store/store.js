@@ -42,8 +42,28 @@ export const store = new Vuex.Store({
     ]
   },
   mutations: {
-    increment(state) {
-      state.count++;
+    addList: (state, listTitle) => {
+      const id =
+        state.lists.length !== 0
+          ? state.lists[state.lists.length - 1].id + 1
+          : 0;
+      const newList = { title: listTitle, active: true, id };
+      state.lists = [...state.lists, newList];
+    },
+    addItem: (state, listId, itemText) => {
+      const listKey = state.lists.findIndex(element => element.id == listId);
+      console.log(listKey, "Item Text", itemText);
+      state.lists[listKey].listItems.push({
+        id: 999,
+        itemText: "HELLLLLLLOOOOOO",
+        active: true
+      });
+      //   const id =
+      //     this.listItems.length !== 0
+      //       ? this.listItems[this.listItems.length - 1].id + 1
+      //       : 0;
+      //   const newItem = { itemText, active: true, id };
+      //   this.listItems = [...this.listItems, newItem];
     }
   },
   getters: {

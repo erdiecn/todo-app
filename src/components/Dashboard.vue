@@ -58,13 +58,7 @@ export default {
       console.log("Almost deleted", id);
     },
     addList(listTitle) {
-      const id =
-        this.$store.getters.lists.length !== 0
-          ? this.$store.getters.lists[this.$store.getters.lists.length - 1].id +
-            1
-          : 0;
-      const newList = { title: listTitle, active: true, id };
-      this.$store.getters.lists = [...this.$store.getters.lists, newList];
+      this.$store.commit("addList", listTitle);
     }
   }
 };

@@ -59,12 +59,7 @@ export default {
       console.log("Almost deleted", id);
     },
     addItem(itemText) {
-      const id =
-        this.listItems.length !== 0
-          ? this.listItems[this.listItems.length - 1].id + 1
-          : 0;
-      const newItem = { itemText, active: true, id };
-      this.listItems = [...this.listItems, newItem];
+      this.$store.commit("addItem", this.listId, itemText);
     },
     deactivateList: function(listId) {
       console.log("deleted", listId);
