@@ -1,12 +1,13 @@
 <template>
   <div>
     <AddList v-on:addNewList="addList" />
-    <List v-for="list in activeLists"
-        :key="list.id"
-        :listId="list.id"
-        :listTitle="list.title"
-        :listItems="list.listItems"
-        v-on:delete-list="deleteList(list.id)"
+    <List
+      v-for="list in activeLists"
+      :key="list.id"
+      :listId="list.id"
+      :listTitle="list.title"
+      :listItems="list.listItems"
+      v-on:delete-list="deleteList(list.id)"
     />
     <div class="container" v-for="list in activeLists" :key="list.id">
       <ListItemWholeview
@@ -34,57 +35,21 @@ export default {
   components: {
     List,
     AddList,
-    ListItemWholeview,
-  },
-  data: () => {
-    return {
-      lists: [
-        {
-          id: 1,
-          title: "Chores1",
-          active: true,
-          listItems: [
-            { id: 11, itemText: "Wash the dishes", active: true },
-            { id: 21, itemText: "Pick up toys", active: true },
-            { id: 31, itemText: "Laundry", active: true },
-            { id: 41, itemText: "Walk the dog", active: true },
-          ],
-        },
-        {
-          id: 2,
-          title: "Chores2",
-          active: true,
-          listItems: [
-            { id: 12, itemText: "Wash the dishes", active: true },
-            { id: 22, itemText: "Pick up toys", active: true },
-            { id: 32, itemText: "Laundry", active: true },
-            { id: 42, itemText: "Walk the dog", active: true },
-          ],
-        },
-        {
-          id: 3,
-          title: "Chores3",
-          active: true,
-          listItems: [
-            { id: 13, itemText: "Wash the dishes", active: true },
-            { id: 23, itemText: "Pick up toys", active: true },
-            { id: 33, itemText: "Laundry", active: true },
-            { id: 43, itemText: "Walk the dog", active: true },
-          ],
-        },
-      ],
-    };
+    ListItemWholeview
   },
   computed: {
     activeLists() {
-      return this.lists.filter((list) => {
+      console.log(this.$store.getters.lists);
+      console.log(this.$store);
+
+      return this.$store.getters.lists.filter(list => {
         return list.active;
       });
-    },
+    }
   },
   methods: {
     deleteList(id) {
-      this.lists = this.lists.map((obj) => {
+      this.$store.getters.lists = this.$store.getters.lists.map(obj => {
         if (obj.id == id) {
           obj.active = false;
         }
@@ -94,11 +59,14 @@ export default {
     },
     addList(listTitle) {
       const id =
-        this.lists.length !== 0 ? this.lists[this.lists.length - 1].id + 1 : 0;
+        this.$store.getters.lists.length !== 0
+          ? this.$store.getters.lists[this.$store.getters.lists.length - 1].id +
+            1
+          : 0;
       const newList = { title: listTitle, active: true, id };
-      this.lists = [...this.lists, newList];
-    },
-  },
+      this.$store.getters.lists = [...this.$store.getters.lists, newList];
+    }
+  }
 };
 </script>
 
