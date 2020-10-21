@@ -3,12 +3,13 @@ import App from "./App.vue";
 // import "bulma/css/bulma.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSquare, faCheckSquare } from "@fortawesome/free-regular-svg-icons";
+import { faSquare as farSquare } from "@fortawesome/free-regular-svg-icons";
+import { faSquare as fasSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 require("@/assets/main.scss");
 
-library.add(faSquare, faCheckSquare);
+library.add(fasSquare, farSquare);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

@@ -15,6 +15,7 @@
         :listId="item.id"
         :itemText="item.itemText"
         :listTitle="list.title"
+        v-on:delete-item="deleteItem(item.id)"
       />
     </div>
     <AddList v-on:addNewList="addList" />
