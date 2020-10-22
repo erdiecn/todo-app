@@ -50,12 +50,13 @@ export const store = new Vuex.Store({
       const newList = { title: listTitle, active: true, id };
       state.lists = [...state.lists, newList];
     },
-    addItem: (state, listId, itemText) => {
-      const listKey = state.lists.findIndex(element => element.id == listId);
-      console.log(listKey, "Item Text", itemText);
+    addItem: (state, payload) => {
+      console.log("1", payload.listId, payload.itemText);
+      const listKey = state.lists.findIndex(element => element.id == payload.listId);
+      // console.log(listKey, "Item Text", itemText);
       state.lists[listKey].listItems.push({
         id: 999,
-        itemText: "HELLLLLLLOOOOOO",
+        itemText: payload.itemText,
         active: true
       });
       //   const id =

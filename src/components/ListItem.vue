@@ -22,7 +22,6 @@ export default {
   props: {
     itemText: String,
     itemId: Number
-    // listTitle: String,
   },
   data() {
     return {

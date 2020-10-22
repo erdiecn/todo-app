@@ -38,6 +38,7 @@ export default {
   },
   methods: {
     getNewItem: function() {
+      // console.log(this.newItem);
       this.$emit("addNewItem", this.newItem);
       this.newItem = "";
     }

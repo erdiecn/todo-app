@@ -59,7 +59,11 @@ export default {
       console.log("Almost deleted", id);
     },
     addItem(itemText) {
-      this.$store.commit("addItem", this.listId, itemText);
+      console.log(itemText);
+      this.$store.commit("addItem", {
+        listId: this.listId,
+        itemText: itemText
+      });
     },
     deactivateList: function(listId) {
       console.log("deleted", listId);
