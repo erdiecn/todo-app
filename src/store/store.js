@@ -1,47 +1,30 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  state: {
-    lists: [
-      {
-        id: 1,
-        title: "Chores1",
-        active: true,
-        listItems: [
-          { id: 11, itemText: "Wash the dishes", active: true },
-          { id: 21, itemText: "Pick up toys", active: true },
-          { id: 31, itemText: "Laundry", active: true },
-          { id: 41, itemText: "Walk the dog", active: true }
-        ]
-      },
-      {
-        id: 2,
-        title: "Chores2",
-        active: true,
-        listItems: [
-          { id: 12, itemText: "Wash the dishes", active: true },
-          { id: 22, itemText: "Pick up toys", active: true },
-          { id: 32, itemText: "Laundry", active: true },
-          { id: 42, itemText: "Walk the dog", active: true }
-        ]
-      },
-      {
-        id: 3,
-        title: "Chores3",
-        active: true,
-        listItems: [
-          { id: 13, itemText: "Wash the dishes", active: true },
-          { id: 23, itemText: "Pick up toys", active: true },
-          { id: 33, itemText: "Laundry", active: true },
-          { id: 43, itemText: "Walk the dog", active: true }
-        ]
-      }
-    ]
+  state: { lists: [] },
+
+  getters: {
+    lists: state => state.lists
   },
+
+  actions: {
+    async fetchLists({ commit }) {
+      try {
+        const lists = await axios.get("http://localhost:3000/lists");
+        console.log("hey fetch is working", lists.data);
+        commit("setLists", lists.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+
   mutations: {
+    setLists: (state, lists) => (state.lists = lists),
     addList: (state, listTitle) => {
       const id =
         state.lists.length !== 0
@@ -52,7 +35,9 @@ export const store = new Vuex.Store({
     },
     addItem: (state, payload) => {
       console.log("1", payload.listId, payload.itemText);
-      const listKey = state.lists.findIndex(element => element.id == payload.listId);
+      const listKey = state.lists.findIndex(
+        element => element.id == payload.listId
+      );
       // console.log(listKey, "Item Text", itemText);
       state.lists[listKey].listItems.push({
         id: 999,
@@ -66,8 +51,5 @@ export const store = new Vuex.Store({
       //   const newItem = { itemText, active: true, id };
       //   this.listItems = [...this.listItems, newItem];
     }
-  },
-  getters: {
-    lists: state => state.lists
   }
 });
