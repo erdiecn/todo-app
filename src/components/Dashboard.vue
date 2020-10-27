@@ -26,7 +26,7 @@
 import List from "./List";
 import AddList from "./AddList";
 import ListItemWholeview from "./ListItemWholeview";
-import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Dashboard",
@@ -38,26 +38,18 @@ export default {
     AddList,
     ListItemWholeview
   },
+
   computed: {
-    // mapGetters(["lists"]),
-    // created() {
-    //   this.fetchLists();
-    // },
+    ...mapGetters(["allLists"]),
 
     activeLists() {
-      /// this is being called over and over
-
-      console.log(this.$store.getters.lists.lists); // this works
-      this.fetchLists();
-      return this.$store.getters.lists.lists.filter(list => {
+      return this.$store.getters.allLists.filter(list => {
+        console.log(list.active);
         return list.active;
       });
-      break;
     }
   },
   methods: {
-    ...mapActions(["fetchLists"]),
-
     deleteList(id) {
       this.$store.getters.lists = this.$store.getters.lists.map(obj => {
         if (obj.id == id) {

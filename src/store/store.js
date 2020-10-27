@@ -5,18 +5,20 @@ import axios from "axios";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  state: { lists: [] },
+  state: { lists: [], loading: true },
 
   getters: {
-    lists: state => state.lists
+    allLists: state => state.lists,
+    isLoading: state => state.loading
   },
 
   actions: {
     async fetchLists({ commit }) {
       try {
-        const lists = await axios.get("http://localhost:3000/lists");
-        console.log("hey fetch is working", lists.data);
-        commit("setLists", lists.data);
+        const result = await axios.get("http://localhost:3000/lists");
+        console.log("hey fetch is working", result.data);
+        commit("setLists", result.data.lists);
+        commit("setLoaded");
       } catch (err) {
         console.log(err);
       }
@@ -25,6 +27,9 @@ export const store = new Vuex.Store({
 
   mutations: {
     setLists: (state, lists) => (state.lists = lists),
+
+    setLoaded: state => (state.loading = false),
+
     addList: (state, listTitle) => {
       const id =
         state.lists.length !== 0
