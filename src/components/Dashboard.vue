@@ -6,15 +6,15 @@
       :key="list.id"
       :listId="list.id"
       :listTitle="list.title"
-      :listItems="list.listItems"
+      :listItems="list.items"
       v-on:delete-list="deleteList(list.id)"
     />
     <div class="container" v-for="list in activeLists" :key="list.id">
       <ListItemWholeview
-        v-for="item in list.listItems"
+        v-for="item in list.items"
         :key="item.id"
         :listId="item.id"
-        :itemText="item.itemText"
+        :itemText="item.text"
         :listTitle="list.title"
       />
     </div>
@@ -43,10 +43,14 @@ export default {
     ...mapGetters(["allLists"]),
 
     activeLists() {
-      return this.$store.getters.allLists.filter(list => {
-        console.log(list.active);
-        return list.active;
-      });
+      if (!this.$store.getters.isLoading) {
+        return this.$store.getters.allLists.filter(list => {
+          console.log(list.active);
+          return list.active;
+        });
+      } else {
+        return [];
+      }
     }
   },
   methods: {

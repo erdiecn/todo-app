@@ -11,13 +11,15 @@
           <ListItem
             v-for="item in listItems"
             :key="item.id"
-            :itemText="item.itemText"
+            :itemText="item.text"
             :itemId="item.id"
-            :itemComplete="item.completed"
+            :itemComplete="item.complete"
             v-on:delete-item="deleteItem(item.id)"
           />
         </div>
-        <div><AddListItem v-on:addNewItem="addItem" /></div>
+        <div>
+          <AddListItem v-on:addNewItem="addItem" />
+        </div>
       </div>
     </div>
   </section>
@@ -44,7 +46,9 @@ export default {
   computed: {
     activeItems() {
       return this.listItems.filter(item => {
-        return item.active;
+        // return item.active;
+        console.log(item);
+        return true;
       });
     }
   },
