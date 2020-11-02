@@ -3,19 +3,12 @@
     <div class="field">
       <label class="label">Add new todo item</label>
       <div class="control">
-        <input
-          class="input"
-          type="text"
-          v-model="newItem"
-          placeholder="Add new Todo!"
-        />
+        <input class="input" type="text" v-model="newItem" placeholder="Add new Todo!" />
       </div>
     </div>
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-primary" v-on:click="getNewItem()">
-          Submit
-        </button>
+        <button class="button is-primary" v-on:click="getNewItem()">Submit</button>
       </div>
       <div class="control">
         <button class="button is-link is-light">Cancel</button>
@@ -25,11 +18,13 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "AddListItem",
   props: {
     // itemText: String,
-    // itemId: Number
+    listId: Number
   },
   data() {
     return {
@@ -37,9 +32,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["addItem"]),
+
     getNewItem: function() {
       // console.log(this.newItem);
-      this.$emit("addNewItem", this.newItem);
+      const payload = { list_id: this.listId, text: this.newItem };
+      this.$store.dispatch("addItem", payload);
       this.newItem = "";
     }
   }

@@ -1,11 +1,10 @@
 <template>
-
   <section class="section">
     <div class="container">
-        <input v-model="newList" placeholder="Add new TodoList!">
-        <button v-on:click="getNewList()">+</button>
+      <input v-model="newList" placeholder="Add new TodoList!" />
+      <button v-on:click="getNewList()">+</button>
     </div>
-  </section>  
+  </section>
 </template>
 
 <script>
@@ -16,14 +15,14 @@ export default {
     // itemId: Number
   },
   data() {
-      return {
-          newList: "",
-      }
+    return {
+      newList: ""
+    };
   },
   methods: {
-    getNewList: function(){
-        this.$emit("addNewList", this.newList);
-        this.newList = "";
+    getNewList: function() {
+      this.$store.dispatch("addList", this.newList);
+      this.newList = "";
     }
   }
 };
