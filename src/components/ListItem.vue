@@ -22,7 +22,6 @@ export default {
   props: {
     itemText: String,
     itemId: Number
-    // listTitle: String,
   },
   data() {
     return {
@@ -32,7 +31,7 @@ export default {
   methods: {
     deactivate: function(itemId) {
       console.log("deleted", itemId);
-      this.$emit("delete-item");
+      this.$store.commit("deleteItem", itemId);
     },
 
     markComplete() {
