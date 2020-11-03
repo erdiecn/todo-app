@@ -18,7 +18,7 @@
           />
         </div>
         <div>
-          <AddListItem v-on:addNewItem="addItem" />
+          <AddListItem v-on:addNewItem="addItem" :listId="listId" />
         </div>
       </div>
     </div>

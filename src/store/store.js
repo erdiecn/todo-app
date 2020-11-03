@@ -22,6 +22,29 @@ export const store = new Vuex.Store({
       } catch (err) {
         console.log(err);
       }
+    },
+
+    async addList({ commit }, newList) {
+      try {
+        const result = await axios.post("http://localhost:3000/lists", {
+          title: newList
+        });
+        console.log(result.data, "post was called");
+        commit("addList", result.data.list);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addItem({ commit }, newItem) {
+      try {
+        const result = await axios.post("http://localhost:3000/item", {
+          ...newItem
+        });
+        console.log(result.data, "post to items");
+        commit("addItem", result.data.item);
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
 
@@ -30,24 +53,23 @@ export const store = new Vuex.Store({
 
     setLoaded: state => (state.loading = false),
 
-    addList: (state, listTitle) => {
-      const id =
-        state.lists.length !== 0
-          ? state.lists[state.lists.length - 1].id + 1
-          : 0;
-      const newList = { title: listTitle, active: true, id };
-      state.lists = [...state.lists, newList];
+    addList: (state, list) => {
+      state.lists = [...state.lists, list];
     },
+
     addItem: (state, payload) => {
-      console.log("1", payload.listId, payload.itemText);
+      // console.log("1", payload.listId, payload.text);
       const listKey = state.lists.findIndex(
-        element => element.id == payload.listId
+        element => element.id == payload.list_id
       );
       // console.log(listKey, "Item Text", itemText);
-      state.lists[listKey].listItems.push({
-        id: 999,
-        itemText: payload.itemText,
-        active: true
+      console.log(state.lists[listKey], "listkey");
+      state.lists[listKey].items.push({
+        id: payload.id,
+        text: payload.text,
+        active: payload.active,
+        complete: payload.complete,
+        list_id: payload.list_id
       });
       //   const id =
       //     this.listItems.length !== 0
