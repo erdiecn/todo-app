@@ -45,6 +45,19 @@ export const store = new Vuex.Store({
       } catch (err) {
         console.log(err);
       }
+    },
+    async completeItem({ commit }, itemComplete) {
+      try {
+        console.log(itemComplete, "itemComplete");
+        const result = await axios.put("http://localhost:3000/item/${id}", {
+          complete: !itemComplete.item_complete
+        });
+        
+        console.log(result.data, "patch complete status");
+        commit("completeItem", result.data.itemComplete);
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
 
@@ -71,12 +84,11 @@ export const store = new Vuex.Store({
         complete: payload.complete,
         list_id: payload.list_id
       });
-      //   const id =
-      //     this.listItems.length !== 0
-      //       ? this.listItems[this.listItems.length - 1].id + 1
-      //       : 0;
-      //   const newItem = { itemText, active: true, id };
-      //   this.listItems = [...this.listItems, newItem];
+    },
+
+    completeItem: (state, payload) => {
+      console.log(payload, "payload");
+      console.log(state.lists.items[payload.item_id], "id is working");
     }
   }
 });
