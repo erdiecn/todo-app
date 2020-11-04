@@ -3,7 +3,7 @@
     <AddList v-on:addNewList="addList" />
     <List
       v-for="list in activeLists"
-      :key="list.id"
+      :key="`list-${list.id}`"
       :listId="list.id"
       :listTitle="list.title"
       :listItems="list.items"
@@ -12,7 +12,7 @@
     <div class="container" v-for="list in activeLists" :key="list.id">
       <ListItemWholeview
         v-for="item in list.items"
-        :key="item.id"
+        :key="`item-${item.id}`"
         :listId="item.id"
         :itemText="item.text"
         :listTitle="list.title"

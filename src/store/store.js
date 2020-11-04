@@ -49,12 +49,14 @@ export const store = new Vuex.Store({
     async completeItem({ commit }, itemComplete) {
       try {
         console.log(itemComplete, "itemComplete");
-        const result = await axios.put("http://localhost:3000/item/${id}", {
-          complete: !itemComplete.item_complete
-        });
-        
+        const payload = {
+          complete: !itemComplete.complete,
+          id: itemComplete.id
+        };
+        const result = await axios.patch("http://localhost:3000/item", payload);
+
         console.log(result.data, "patch complete status");
-        commit("completeItem", result.data.itemComplete);
+        commit("completeItem", payload);
       } catch (err) {
         console.log(err);
       }
@@ -87,8 +89,17 @@ export const store = new Vuex.Store({
     },
 
     completeItem: (state, payload) => {
-      console.log(payload, "payload");
-      console.log(state.lists.items[payload.item_id], "id is working");
+      const newLists = state.lists.map(list => {
+        const newItems = list.items.map(item => {
+          if (item.id == payload.id) {
+            item.complete = payload.complete;
+          }
+          return item;
+        });
+        list.items = newItems;
+        return list;
+      });
+      state.lists = newLists;
     }
   }
 });

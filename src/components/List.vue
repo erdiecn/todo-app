@@ -13,7 +13,7 @@
             :key="item.id"
             :itemText="item.text"
             :itemId="item.id"
-            :itemComplete="item.complete"
+            :itemComplete="Boolean(Number(item.complete))"
             v-on:delete-item="deleteItem(item.id)"
           />
         </div>

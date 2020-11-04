@@ -2,15 +2,10 @@
   <div v-bind:class="{ 'is-complete': itemComplete }">
     <p>
       <button v-on:click="markComplete()">
-        <font-awesome-icon
-          :icon="['far', 'square']"
-          v-if="this.itemComplete == false"
-        />
+        <font-awesome-icon :icon="['far', 'square']" v-if="this.itemComplete == false" />
         <font-awesome-icon :icon="['fas', 'square']" v-else />
       </button>
-
       {{ itemText }}
-
       <button v-on:click="deactivate(itemId)">X</button>
     </p>
   </div>
@@ -22,7 +17,7 @@ export default {
   props: {
     itemText: String,
     itemId: Number,
-    itemComplete: Boolean,
+    itemComplete: Boolean
   },
   data() {
     return {
@@ -36,8 +31,11 @@ export default {
     },
 
     markComplete() {
-      console.log("hello");
-      const payload = { item_id: this.itemId, item_complete: this.itemComplete };
+      console.log("itemcomplete", this.itemComplete);
+      const payload = {
+        id: this.itemId,
+        complete: this.itemComplete
+      };
       this.$store.dispatch("completeItem", payload);
     }
   }
