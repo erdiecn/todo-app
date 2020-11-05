@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AddList v-on:addNewList="addList" />
+    <AddList />
     <List
       v-for="list in this.$store.getters.allLists"
       :key="`list-${list.id}`"
@@ -13,12 +13,13 @@
       <ListItemWholeview
         v-for="item in list.items"
         :key="`item-${item.id}`"
-        :listId="item.id"
+        :itemId="item.id"
         :itemText="item.text"
+        :itemComplete="Boolean(Number(item.complete))"
         :listTitle="list.title"
       />
     </div>
-    <AddList v-on:addNewList="addList" />
+    <AddList />
   </div>
 </template>
 
@@ -26,47 +27,15 @@
 import List from "./List";
 import AddList from "./AddList";
 import ListItemWholeview from "./ListItemWholeview";
-import { mapGetters } from "vuex";
 
 export default {
   name: "Dashboard",
-  props: {
-    // title: String
-  },
+
   components: {
     List,
     AddList,
     ListItemWholeview
   },
-
-  computed: {
-    ...mapGetters(["allLists"])
-
-    // activeLists() {
-    //   if (!this.$store.getters.isLoading) {
-    //     return this.$store.getters.allLists.filter(list => {
-    //       console.log(list.active);
-    //       return list.active;
-    //     });
-    //   } else {
-    //     return [];
-    //   }
-    // }
-  },
-  methods: {
-    // deleteList(id) {
-    //   this.$store.getters.lists = this.$store.getters.lists.map(obj => {
-    //     if (obj.id == id) {
-    //       obj.active = false;
-    //     }
-    //     return obj;
-    //   });
-    //   console.log("Almost deleted", id);
-    // },
-    addList(listTitle) {
-      this.$store.commit("addList", listTitle);
-    }
-  }
 };
 </script>
 

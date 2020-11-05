@@ -9,7 +9,6 @@
 
 <script>
 import Dashboard from "./components/Dashboard";
-import { mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -18,11 +17,13 @@ export default {
   },
 
   created() {
-    this.fetchLists();
+    this.getList();
   },
 
   methods: {
-    ...mapActions(["fetchLists"])
+    getList: function() {
+      this.$store.dispatch("fetchLists");
+    }
   }
 };
 </script>

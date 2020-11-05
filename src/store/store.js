@@ -51,7 +51,6 @@ export const store = new Vuex.Store({
           id: itemComplete.id
         };
         const result = await axios.patch("http://localhost:3000/item", payload);
-
         console.log(result.data, "patch complete status");
         commit("completeItem", payload);
       } catch (err) {

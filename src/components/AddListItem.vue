@@ -18,12 +18,10 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 
 export default {
   name: "AddListItem",
   props: {
-    // itemText: String,
     listId: Number
   },
   data() {
@@ -32,10 +30,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["addItem"]),
-
     getNewItem: function() {
-      // console.log(this.newItem);
       const payload = { list_id: this.listId, text: this.newItem };
       this.$store.dispatch("addItem", payload);
       this.newItem = "";

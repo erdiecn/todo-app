@@ -15,22 +15,17 @@
 export default {
   name: "ListItem",
   props: {
-    itemText: String,
     itemId: Number,
+    itemText: String,
     itemComplete: Boolean
   },
-  data() {
-    return {
-      isComplete: false
-    };
-  },
+  
   methods: {
     deactivate: function(itemId) {
       this.$store.dispatch("deleteItem", itemId);
     },
 
     markComplete() {
-      console.log("itemcomplete", this.itemComplete);
       const payload = {
         id: this.itemId,
         complete: this.itemComplete
@@ -38,6 +33,7 @@ export default {
       this.$store.dispatch("completeItem", payload);
     }
   }
+  
 };
 </script>
 

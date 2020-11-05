@@ -1,8 +1,8 @@
 <template>
-  <div v-bind:class="{ 'is-complete': isComplete }">
+  <div v-bind:class="{ 'is-complete': itemComplete }">
     <p>
-      <button @click="isComplete = !isComplete">
-        <font-awesome-icon :icon="['far', 'square']" v-if="isComplete == false" />
+      <button v-on:click="markComplete()">
+        <font-awesome-icon :icon="['far', 'square']" v-if="itemComplete == false" />
         <font-awesome-icon :icon="['fas', 'square']" v-else />
       </button>
 
@@ -17,31 +17,28 @@
 <script>
 export default {
   name: "ListItemWholeview",
+
   props: {
-    itemText: String,
     itemId: Number,
+    itemText: String,
+    itemComplete: Boolean,
     listTitle: String,
   },
-  data() {
-    return {
-      isComplete: false,
-    };
-  },
+
   methods: {
     deactivate: function(itemId) {
-      console.log("deleted", itemId);
-      this.$emit("delete-item");
+      this.$store.dispatch("deleteItem", itemId);
     },
+
+    markComplete() {
+      const payload = {
+        id: this.itemId,
+        complete: this.itemComplete
+      };
+      this.$store.dispatch("completeItem", payload);
+    }
   },
-  computed: {
-    allItems: function() {
-      let allItems = [];
-      this.activeItems.forEach((list) => {
-        allItems.push(...list);
-      });
-      return allItems;
-    },
-  },
+  
 };
 </script>
 

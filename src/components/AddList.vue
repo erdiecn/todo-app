@@ -11,8 +11,7 @@
 export default {
   name: "AddList",
   props: {
-    // itemText: String,
-    // itemId: Number
+
   },
   data() {
     return {

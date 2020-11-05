@@ -14,11 +14,10 @@
             :itemText="item.text"
             :itemId="item.id"
             :itemComplete="Boolean(Number(item.complete))"
-            v-on:delete-item="deleteItem(item.id)"
           />
         </div>
         <div>
-          <AddListItem v-on:addNewItem="addItem" :listId="listId" />
+          <AddListItem :listId="listId" />
         </div>
       </div>
     </div>
@@ -32,50 +31,22 @@ import AddListItem from "./AddListItem";
 export default {
   name: "List",
   props: {
-    listTitle: String,
     listId: Number,
+    listTitle: String,
     listItems: Array
   },
+
   components: {
     ListItem,
     AddListItem
   },
-  data: () => {
-    return {};
-  },
-  computed: {
-    activeItems() {
-      return this.listItems.filter(item => {
-        // return item.active;
-        console.log(item);
-        return true;
-      });
-    }
-  },
+
   methods: {
-    deleteItem(id) {
-      this.listItems = this.listItems.map(obj => {
-        if (obj.id == id) {
-          obj.active = false;
-        }
-        return obj;
-      });
-      console.log("Almost deleted", id);
-    },
-    addItem(itemText) {
-      console.log(itemText);
-      this.$store.commit("addItem", {
-        listId: this.listId,
-        itemText: itemText
-      });
-    },
     deactivateList: function(listId) {
       this.$store.dispatch("deleteList", listId);
     }
-    // renameList: function(listId){
-
-    // }
   }
+  
 };
 </script>
 
