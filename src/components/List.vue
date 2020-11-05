@@ -70,8 +70,7 @@ export default {
       });
     },
     deactivateList: function(listId) {
-      console.log("deleted", listId);
-      this.$emit("delete-list");
+      this.$store.dispatch("deleteList", listId);
     }
     // renameList: function(listId){
 

@@ -2,21 +2,20 @@
   <div>
     <AddList v-on:addNewList="addList" />
     <List
-      v-for="list in activeLists"
+      v-for="list in this.$store.getters.allLists"
       :key="`list-${list.id}`"
       :listId="list.id"
       :listTitle="list.title"
       :listItems="list.items"
       v-on:delete-list="deleteList(list.id)"
     />
-    <div class="container" v-for="list in activeLists" :key="list.id">
+    <div class="container" v-for="list in this.$store.getters.allLists" :key="list.id">
       <ListItemWholeview
         v-for="item in list.items"
         :key="`item-${item.id}`"
         :listId="item.id"
         :itemText="item.text"
         :listTitle="list.title"
-        v-on:delete-item="deleteItem(item.id)"
       />
     </div>
     <AddList v-on:addNewList="addList" />
@@ -41,29 +40,29 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["allLists"]),
+    ...mapGetters(["allLists"])
 
-    activeLists() {
-      if (!this.$store.getters.isLoading) {
-        return this.$store.getters.allLists.filter(list => {
-          console.log(list.active);
-          return list.active;
-        });
-      } else {
-        return [];
-      }
-    }
+    // activeLists() {
+    //   if (!this.$store.getters.isLoading) {
+    //     return this.$store.getters.allLists.filter(list => {
+    //       console.log(list.active);
+    //       return list.active;
+    //     });
+    //   } else {
+    //     return [];
+    //   }
+    // }
   },
   methods: {
-    deleteList(id) {
-      this.$store.getters.lists = this.$store.getters.lists.map(obj => {
-        if (obj.id == id) {
-          obj.active = false;
-        }
-        return obj;
-      });
-      console.log("Almost deleted", id);
-    },
+    // deleteList(id) {
+    //   this.$store.getters.lists = this.$store.getters.lists.map(obj => {
+    //     if (obj.id == id) {
+    //       obj.active = false;
+    //     }
+    //     return obj;
+    //   });
+    //   console.log("Almost deleted", id);
+    // },
     addList(listTitle) {
       this.$store.commit("addList", listTitle);
     }

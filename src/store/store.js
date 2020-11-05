@@ -16,7 +16,6 @@ export const store = new Vuex.Store({
     async fetchLists({ commit }) {
       try {
         const result = await axios.get("http://localhost:3000/lists");
-        console.log("hey fetch is working", result.data);
         commit("setLists", result.data.lists);
         commit("setLoaded");
       } catch (err) {
@@ -29,7 +28,6 @@ export const store = new Vuex.Store({
         const result = await axios.post("http://localhost:3000/lists", {
           title: newList
         });
-        console.log(result.data, "post was called");
         commit("addList", result.data.list);
       } catch (err) {
         console.log(err);
@@ -48,7 +46,6 @@ export const store = new Vuex.Store({
     },
     async completeItem({ commit }, itemComplete) {
       try {
-        console.log(itemComplete, "itemComplete");
         const payload = {
           complete: !itemComplete.complete,
           id: itemComplete.id
@@ -57,6 +54,30 @@ export const store = new Vuex.Store({
 
         console.log(result.data, "patch complete status");
         commit("completeItem", payload);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async deleteItem({ commit }, itemId) {
+      try {
+        const result = await axios.delete(
+          `http://localhost:3000/item/${itemId}`
+        );
+        console.log("result", result);
+        commit("deleteItem", itemId);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async deleteList({ commit }, listId) {
+      try {
+        const result = await axios.delete(
+          `http://localhost:3000/lists/${listId}`
+        );
+        console.log("result", result);
+        commit("deleteList", listId);
       } catch (err) {
         console.log(err);
       }
@@ -78,7 +99,6 @@ export const store = new Vuex.Store({
         element => element.id == payload.list_id
       );
       // console.log(listKey, "Item Text", itemText);
-      console.log(state.lists[listKey], "listkey");
       state.lists[listKey].items.push({
         id: payload.id,
         text: payload.text,
@@ -99,6 +119,18 @@ export const store = new Vuex.Store({
         list.items = newItems;
         return list;
       });
+      state.lists = newLists;
+    },
+    deleteItem: (state, itemId) => {
+      const newLists = state.lists.map(list => {
+        const newItems = list.items.filter(item => item.id != itemId);
+        list.items = newItems;
+        return list;
+      });
+      state.lists = newLists;
+    },
+    deleteList: (state, listId) => {
+      const newLists = state.lists.filter(list => list.id != listId);
       state.lists = newLists;
     }
   }

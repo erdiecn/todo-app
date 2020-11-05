@@ -26,8 +26,7 @@ export default {
   },
   methods: {
     deactivate: function(itemId) {
-      console.log("deleted", itemId);
-      this.$store.commit("deleteItem", itemId);
+      this.$store.dispatch("deleteItem", itemId);
     },
 
     markComplete() {
