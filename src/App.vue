@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Sidebar />
     <Dashboard v-if="!this.$store.getters.isLoading" />
     <div v-if="this.$store.getters.isLoading">
       <h1>Loading</h1>
@@ -9,11 +10,13 @@
 
 <script>
 import Dashboard from "./components/Dashboard";
+import Sidebar from "./components/Sidebar";
 
 export default {
   name: "App",
   components: {
-    Dashboard
+    Dashboard,
+    Sidebar
   },
 
   created() {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <AddList />
     <List
       v-for="list in this.$store.getters.allLists"
       :key="`list-${list.id}`"
@@ -20,6 +19,7 @@
       />
     </div>
     <AddList />
+    <DateDisplay />
   </div>
 </template>
 
@@ -27,6 +27,7 @@
 import List from "./List";
 import AddList from "./AddList";
 import ListItemWholeview from "./ListItemWholeview";
+import DateDisplay from "./DateDisplay";
 
 export default {
   name: "Dashboard",
@@ -34,8 +35,9 @@ export default {
   components: {
     List,
     AddList,
-    ListItemWholeview
-  },
+    ListItemWholeview,
+    DateDisplay
+  }
 };
 </script>
 

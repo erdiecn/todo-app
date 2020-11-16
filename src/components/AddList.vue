@@ -1,8 +1,8 @@
 <template>
   <section class="section">
     <div class="container">
-      <input v-model="newList" placeholder="Add new TodoList!" />
-      <button v-on:click="getNewList()">+</button>
+      <input class="input" v-model="newList" placeholder="Add new TodoList!" />
+      <button class="button is-primary" v-on:click="getNewList()">Submit</button>
     </div>
   </section>
 </template>
@@ -10,9 +10,7 @@
 <script>
 export default {
   name: "AddList",
-  props: {
-
-  },
+  props: {},
   data() {
     return {
       newList: ""
@@ -28,4 +26,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+</style>

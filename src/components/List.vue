@@ -1,9 +1,6 @@
 <template>
   <section class="section">
     <div class="container">
-      <span>
-        <button v-on:click="deactivateList(listId)">X</button>
-      </span>
       <h1 class="title">{{ listTitle }}</h1>
 
       <div class="content">
@@ -19,6 +16,9 @@
         <div>
           <AddListItem :listId="listId" />
         </div>
+        <span>
+          <button v-on:click="deactivateList(listId)">Delete List</button>
+        </span>
       </div>
     </div>
   </section>
@@ -46,7 +46,6 @@ export default {
       this.$store.dispatch("deleteList", listId);
     }
   }
-  
 };
 </script>
 
