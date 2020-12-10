@@ -1,21 +1,26 @@
 <template>
   <div id="app">
-    <Sidebar />
-    <Dashboard v-if="!this.$store.getters.isLoading" />
-    <div v-if="this.$store.getters.isLoading">
-      <h1>Loading</h1>
+    <div class="columns">
+      <Sidebar class="sidebar" v-if="!this.$store.getters.isLoading" />
+      <router-view class="column is-two-thirds" v-if="!this.$store.getters.isLoading">
+        <div v-if="this.$store.getters.isLoading">
+          <div class="pageloader is-active">
+            <span class="title">Loading</span>
+          </div>
+        </div>
+      </router-view>
     </div>
   </div>
 </template>
 
 <script>
-import Dashboard from "./components/Dashboard";
+// import Dashboard from "./pages/Dashboard";
 import Sidebar from "./components/Sidebar";
 
 export default {
   name: "App",
   components: {
-    Dashboard,
+    // Dashboard,
     Sidebar
   },
 
@@ -32,6 +37,7 @@ export default {
 </script>
 
 <style>
-/* #app {
-} */
+.sidebar {
+  position: static;
+}
 </style>

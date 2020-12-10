@@ -1,24 +1,28 @@
 <template>
   <div>
     <div class="field">
-      <label class="label">Add new todo item</label>
       <div class="control">
-        <input class="input" type="text" v-model="newItem" placeholder="Add new Todo!" />
+        <input
+          class="input"
+          type="text"
+          v-model="newItem"
+          v-on:keyup.enter="getNewItem()"
+          placeholder="Add new Todo!"
+        />
       </div>
     </div>
-    <div class="field is-grouped">
+    <!-- <div class="field is-grouped">
       <div class="control">
-        <button class="button is-primary" v-on:click="getNewItem()">Submit</button>
+        <button class="button is-primary" v-on:keyup.enter="getNewItem()">Submit</button>
       </div>
       <div class="control">
         <button class="button is-link is-light">Cancel</button>
-      </div>
-    </div>
+    </div>-->
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
-
 export default {
   name: "AddListItem",
   props: {
@@ -40,4 +44,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped lang="scss">
+@import "../assets/main.scss";
+.input {
+  margin-top: 8px;
+  background-color: $beige-lighter;
+  border: solid 1px;
+  border-color: $beige-light;
+}
+</style>

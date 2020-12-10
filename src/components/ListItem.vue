@@ -1,12 +1,9 @@
 <template>
-  <div v-bind:class="{ 'is-complete': itemComplete }">
+  <div class="list-item" v-bind:class="{ 'is-complete': itemComplete }">
     <p>
-      <button v-on:click="markComplete()">
-        <font-awesome-icon :icon="['far', 'square']" v-if="this.itemComplete == false" />
-        <font-awesome-icon :icon="['fas', 'square']" v-else />
-      </button>
+      <input class="checkmark" type="checkbox" v-on:click="markComplete()" />
       {{ itemText }}
-      <button v-on:click="deactivate(itemId)">X</button>
+      <button class="button is-small" v-on:click="deactivate(itemId)">X</button>
     </p>
   </div>
 </template>
@@ -19,7 +16,7 @@ export default {
     itemText: String,
     itemComplete: Boolean
   },
-  
+
   methods: {
     deactivate: function(itemId) {
       this.$store.dispatch("deleteItem", itemId);
@@ -33,22 +30,28 @@ export default {
       this.$store.dispatch("completeItem", payload);
     }
   }
-  
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.todo-item {
-  height: 55px;
-  font-size: 22px;
-  /* border-style: solid;
-  border-width: 1px; */
-  padding: 7px;
-  padding-left: 50px;
-  margin: 5px;
-  border-radius: 7px;
-  border-color: lightgray;
+<style scoped lang="scss">
+@import "../assets/main.scss";
+
+.list-item {
+  margin-bottom: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  /* background-color: aqua; */
+}
+
+.list-item:hover {
+  border: 1px solid;
+  border-color: $beige-light;
+  padding: 5px;
+}
+
+.p {
+  vertical-align: middle;
 }
 
 #delete-button {
@@ -75,46 +78,75 @@ export default {
   background-color: lightgreen;
 }
 
+.checkmark {
+  width: 25px;
+  height: 25px;
+  margin-top: -50px;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.checkmark:checked {
+  background-color: gray;
+}
+
+.button {
+  background: none;
+  color: inherit;
+  border: none;
+  position: absolute;
+  right: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 /* Hide the browser's default checkbox */
 
-.container input {
+/* .container input {
   position: absolute;
   z-index: 99;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
-}
+} */
 
 /* Create a custom checkbox */
-.checkmark {
+/* .checkmark {
   position: absolute;
   top: 0;
   left: 0;
   height: 25px;
   width: 25px;
   background-color: #8a4d76;
-}
+} */
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+/* .container input:checked ~ .checkmark {
   background-color: #2196f3;
-}
+} */
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+/* .checkmark:after {
   content: "";
   position: absolute;
   display: none;
-}
+} */
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+/* .container input:checked ~ .checkmark:after {
   display: block;
-}
+} */
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+/* .container .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;
@@ -124,5 +156,5 @@ export default {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
+} */
 </style>

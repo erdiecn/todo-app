@@ -1,10 +1,12 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title">{{ listTitle }}</h1>
-
+      <div class="container-head">
+        <h1 class="title">{{ listTitle }}</h1>
+        <button class="button is-small" v-on:click="deactivateList(listId)">Delete List</button>
+      </div>
       <div class="content">
-        <div>
+        <div class="list">
           <ListItem
             v-for="item in listItems"
             :key="item.id"
@@ -16,9 +18,6 @@
         <div>
           <AddListItem :listId="listId" />
         </div>
-        <span>
-          <button v-on:click="deactivateList(listId)">Delete List</button>
-        </span>
       </div>
     </div>
   </section>
@@ -50,4 +49,11 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.button {
+  border: none;
+  background: none;
+  margin-top: -25px;
+  margin-left: auto;
+}
+</style>
