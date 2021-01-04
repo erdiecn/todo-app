@@ -3,7 +3,7 @@
     <div class="field">
       <div class="control">
         <input
-          class="input"
+          class="input is-primary"
           type="text"
           v-model="newItem"
           v-on:keyup.enter="getNewItem()"
@@ -48,8 +48,8 @@ export default {
 @import "../assets/main.scss";
 .input {
   margin-top: 8px;
-  background-color: $beige-lighter;
+  background-color: white;
   border: solid 1px;
-  border-color: $beige-light;
+  /* border-color: $beige-light; */
 }
 </style>

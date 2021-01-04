@@ -2,12 +2,16 @@
   <div v-bind:class="{ 'is-complete': itemComplete }">
     <p>
       <button v-on:click="markComplete()">
-        <font-awesome-icon :icon="['far', 'square']" v-if="itemComplete == false" />
+        <font-awesome-icon
+          :icon="['far', 'square']"
+          v-if="itemComplete == false"
+        />
         <font-awesome-icon :icon="['fas', 'square']" v-else />
       </button>
 
       {{ itemText }}
-      <span class="ctitle"> {{ listTitle }} </span> 
+      {{ itemDueDate }}
+      <span class="ctitle"> {{ listTitle }} </span>
 
       <button v-on:click="deactivate(itemId)">X</button>
     </p>
@@ -23,6 +27,7 @@ export default {
     itemText: String,
     itemComplete: Boolean,
     listTitle: String,
+    itemDueDate: String
   },
 
   methods: {
@@ -37,8 +42,7 @@ export default {
       };
       this.$store.dispatch("completeItem", payload);
     }
-  },
-  
+  }
 };
 </script>
 
@@ -48,8 +52,8 @@ export default {
   text-decoration: line-through;
 }
 
-.ctitle{
-    color: gray;
-    font-size: 0.8rem;
+.ctitle {
+  color: gray;
+  font-size: 0.8rem;
 }
 </style>

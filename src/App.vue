@@ -25,10 +25,16 @@ export default {
   },
 
   created() {
+    this.getLogin();
     this.getList();
   },
 
   methods: {
+    getLogin: function() {
+      console.log("login called");
+      this.$store.dispatch("login");
+    },
+
     getList: function() {
       this.$store.dispatch("fetchLists");
     }

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <DateDisplay />
     <!-- I just need it to get one list based off the above list id -->
     <List
       v-for="list in this.$store.getters.filterLists"
@@ -17,7 +16,6 @@
 <script>
 import List from "../components/List";
 // import AddList from "../components/AddList";
-import DateDisplay from "../components/DateDisplay";
 
 export default {
   name: "SortLists",
@@ -26,8 +24,7 @@ export default {
   },
 
   components: {
-    List,
-    DateDisplay
+    List
   },
 
   created() {

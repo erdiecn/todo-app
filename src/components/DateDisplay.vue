@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1 class="title pt-6" id="day">{{ displayDay }}</h1>
+    <h1 class="title" id="day">{{ displayDay }}</h1>
     <div id="date">{{ displayDate }}</div>
   </div>
 </template>
@@ -80,22 +80,25 @@ export default {
 <style scoped lang="scss">
 @import "../assets/main.scss";
 .body {
-  height: 150px;
-  width: 100%;
-  background-color: $beige-lighter;
-  border-bottom: 1px solid;
+  height: 75px;
+  margin: none;
+  /* width: 100%; */
+
+  border-bottom: 1px solid rgba(7, 7, 7, 0.1);
 }
 
 #day {
-  top: 0;
-  margin-left: 20px;
+  margin-top: 20px;
+  margin-left: -40px;
   padding-right: 20px;
-  color: $brown;
+  color: rgb(51, 63, 72);
+  font-size: 18px;
 }
 
 #date {
-  margin-left: 23px;
+  margin-left: -40px;
   margin-top: -20px;
-  color: $brown;
+  color: rgb(51, 63, 72);
+  font-size: 16px;
 }
 </style>

@@ -3,15 +3,18 @@
     <div class="container">
       <div class="container-head">
         <h1 class="title">{{ listTitle }}</h1>
-        <button class="button is-small" v-on:click="deactivateList(listId)">Delete List</button>
+        <button class="button is-small" v-on:click="deactivateList(listId)">
+          Delete List
+        </button>
       </div>
       <div class="content">
         <div class="list">
           <ListItem
             v-for="item in listItems"
-            :key="item.id"
-            :itemText="item.text"
+            :key="`item-${item.id}`"
             :itemId="item.id"
+            :itemText="item.text"
+            :itemDueDate="item.due_date"
             :itemComplete="Boolean(Number(item.complete))"
           />
         </div>
@@ -50,6 +53,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.container-head {
+  border-bottom: solid 0.5px;
+  display: flex;
+  margin-bottom: 30px;
+}
 .button {
   border: none;
   background: none;

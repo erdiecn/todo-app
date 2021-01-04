@@ -79,8 +79,8 @@ export default {
 }
 
 .checkmark {
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   margin-top: -50px;
   background-color: white;
   border-radius: 50%;

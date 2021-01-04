@@ -1,7 +1,27 @@
 <template>
   <div class="body">
+    <DateDisplay class="date" />
     <aside class="menu">
-      <p class="menu-label">Sort Lists by Clicking on the List Name</p>
+      <div class="menu-label" id="completed">
+        <font-awesome-icon :icon="['fas', 'check']" class="icon" id="icon-green" />
+        <p>Completed</p>
+      </div>
+      <div class="menu-label" id="priority">
+        <font-awesome-icon :icon="['fas', 'bookmark']" class="icon" id="icon-purple" />
+        <p>Priority</p>
+      </div>
+      <div class="menu-label" id="all-lists">
+        <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" id="icon-blue" />
+        <p>All Lists</p>
+      </div>
+      <div class="menu-label" id="lists">
+        <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" />
+        <p>Class Lists</p>
+      </div>
+      <div class="menu-label" id="lists">
+        <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" />
+        <p>My Lists</p>
+      </div>
       <ul class="menu-list">
         <MenuItem
           v-for="list in this.$store.getters.allLists"
@@ -11,7 +31,16 @@
         />
       </ul>
       <router-link to="/sort">
-        <button class="button is-primary" v-on:click="filterLists()">Filter</button>
+        <button class="button is-primary">
+          <font-awesome-icon :icon="['fas', 'filter']" class="icon-button" />
+          <p id="button-text">Filter</p>
+        </button>
+      </router-link>
+      <router-link to="/add">
+        <button class="button is-primary" v-on:click="filterLists()">
+          <font-awesome-icon :icon="['fas', 'plus']" class="icon-button" />
+          <p id="button-text">Add List</p>
+        </button>
       </router-link>
     </aside>
   </div>
@@ -19,6 +48,7 @@
 
 <script>
 import MenuItem from "./MenuItem";
+import DateDisplay from "../components/DateDisplay";
 
 export default {
   name: "Sidebar",
@@ -30,7 +60,8 @@ export default {
   },
 
   components: {
-    MenuItem
+    MenuItem,
+    DateDisplay
   },
 
   mounted() {
@@ -64,7 +95,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  scoped>
+<style scoped>
 .body {
   display: flex;
 
@@ -72,20 +103,19 @@ export default {
 
   height: 100vh;
 
-  background-color: rgb(51, 63, 72);
-  background-color: linear-gradient(
-    90deg,
-    rgba(51, 63, 72, 1) 0%,
-    rgba(7, 71, 84, 1) 94%
-  );
-  padding-top: 20px;
+  background-color: #f5f6f7;
+
+  /* padding-top: 20px; */
   padding-left: 40px;
   width: 25vw;
-  color: lightgrey;
+  color: rgb(51, 63, 72);
 }
 .menu-label {
-  color: lightgrey;
-  font-size: 16px;
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: rgb(51, 63, 72);
+  font-size: 14px;
 }
 
 .menu-list {
@@ -95,5 +125,56 @@ export default {
 .button {
   width: 90%;
   align-self: flex-end;
+  background-color: rgb(51, 63, 72) !important;
+  margin-bottom: 15px;
+}
+
+.date {
+  height: 75px;
+  /* background-color: #fdf8ef; */
+  /* margin-left: -10px; */
+  width: 20vw;
+
+  overflow: hidden;
+}
+
+#button-text {
+  font-size: 17px;
+}
+
+p {
+  margin-top: 3px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.icon-button {
+  width: 15px;
+  margin-right: 7px;
+}
+
+#icon-green {
+  color: green;
+}
+
+#icon-purple {
+  color: indigo;
+}
+
+#icon-blue {
+  color: darkblue;
+}
+#completed {
+  margin-top: 10px;
+}
+
+#priority {
+  margin-top: -15px;
+}
+
+#all-lists {
+  margin-top: -15px;
 }
 </style>

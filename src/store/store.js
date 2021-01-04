@@ -5,7 +5,13 @@ import axios from "axios";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  state: { lists: [], loading: true, checkedLists: [], filterLists: [] },
+  state: {
+    lists: [],
+    loading: true,
+    checkedLists: [],
+    filterLists: [],
+    user_id: 1
+  },
 
   getters: {
     allLists: state => state.lists,
@@ -15,12 +21,29 @@ export const store = new Vuex.Store({
   },
 
   actions: {
+    async login() {
+      try {
+        const result = await axios.post(
+          "http://localhost:3000/user/login",
+          { user_id: 1 },
+          { withCredentials: true }
+        );
+        console.log(result, "login result");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
     /// go to the api
     async fetchLists({ commit }) {
       try {
-        const result = await axios.get("http://localhost:3000/lists");
+        const result = await axios.get("http://localhost:3000/lists", {
+          withCredentials: true
+        });
         commit("setLists", result.data.lists);
         commit("setLoaded");
+        console.log("fetch", result.data.lists);
+        // console.log("stats", this.state.lists);
       } catch (err) {
         console.log(err);
       }
@@ -28,9 +51,13 @@ export const store = new Vuex.Store({
 
     async addList({ commit }, newList) {
       try {
-        const result = await axios.post("http://localhost:3000/lists", {
-          title: newList
-        });
+        const result = await axios.post(
+          "http://localhost:3000/lists",
+          {
+            title: newList
+          },
+          { withCredentials: true }
+        );
         commit("addList", result.data.list);
       } catch (err) {
         console.log(err);
@@ -38,9 +65,13 @@ export const store = new Vuex.Store({
     },
     async addItem({ commit }, newItem) {
       try {
-        const result = await axios.post("http://localhost:3000/item", {
-          ...newItem
-        });
+        const result = await axios.post(
+          "http://localhost:3000/item",
+          {
+            ...newItem
+          },
+          { withCredentials: true }
+        );
         console.log(result.data, "post to items");
         commit("addItem", result.data.item);
       } catch (err) {
@@ -53,7 +84,11 @@ export const store = new Vuex.Store({
           complete: !itemComplete.complete,
           id: itemComplete.id
         };
-        const result = await axios.patch("http://localhost:3000/item", payload);
+        const result = await axios.patch(
+          "http://localhost:3000/item",
+          payload,
+          { withCredentials: true }
+        );
         console.log(result.data, "patch complete status");
         commit("completeItem", payload);
       } catch (err) {
@@ -64,7 +99,8 @@ export const store = new Vuex.Store({
     async deleteItem({ commit }, itemId) {
       try {
         const result = await axios.delete(
-          `http://localhost:3000/item/${itemId}`
+          `http://localhost:3000/item/${itemId}`,
+          { withCredentials: true }
         );
         console.log("result", result);
         commit("deleteItem", itemId);
@@ -76,7 +112,8 @@ export const store = new Vuex.Store({
     async deleteList({ commit }, listId) {
       try {
         const result = await axios.delete(
-          `http://localhost:3000/lists/${listId}1`
+          `http://localhost:3000/lists/${listId}1`,
+          { withCredentials: true }
         );
         console.log("result", result);
         commit("deleteList", listId);
@@ -167,11 +204,9 @@ export const store = new Vuex.Store({
     removeCheckedLists: (state, listId) => {
       console.log("remove", state.checkedLists, "v", listId.value);
 
-      const newCheckedLists = state.checkedLists.filter(
-        list => list !== listId.value
-      ); /// need to remove the clicked
-      state.checkedLists = newCheckedLists;
-      // console.log(state.checkedLists, "deletecheckedLists");
+      const result = state.checkedLists.filter(list => list !== listId.value); /// need to remove the clicked
+      state.checkedLists = result;
+      console.log(result, "deletecheckedLists");
     }
   }
 });

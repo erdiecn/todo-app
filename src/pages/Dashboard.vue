@@ -1,6 +1,12 @@
 <template>
   <div class="body">
-    <DateDisplay class="date" />
+    <router-view class="column is-two-thirds" v-if="!this.$store.getters.isLoading">
+      <div>
+        <div class="pageloader is-active">
+          <span class="title">Loading</span>
+        </div>
+      </div>
+    </router-view>
     <List
       v-for="list in this.$store.getters.allLists"
       :key="`list-${list.id}`"
@@ -9,34 +15,38 @@
       :listItems="list.items"
       v-on:delete-list="deleteList(list.id)"
     />
-    <!-- <div class="container" v-for="list in this.$store.getters.allLists" :key="list.id">
+    <!-- :listItems="list.items" 
+    <div
+      class="container"
+      v-for="list in this.$store.getters.allLists"
+      :key="list.id"
+    >
       <ListItemWholeview
         v-for="item in list.items"
         :key="`item-${item.id}`"
         :itemId="item.id"
         :itemText="item.text"
+        :itemDueDate="item.due_date"
         :itemComplete="Boolean(Number(item.complete))"
         :listTitle="list.title"
       />
     </div>-->
-    <AddList />
   </div>
 </template>
 
 <script>
 import List from "../components/List";
-import AddList from "../components/AddList";
+
 // import ListItemWholeview from "../components/ListItemWholeview";
-import DateDisplay from "../components/DateDisplay";
 
 export default {
   name: "Dashboard",
 
   components: {
-    List,
-    AddList,
-    // ListItemWholeview,
-    DateDisplay
+    List
+
+    // ListItemWholeview
+    // DateDisplay
   }
 };
 </script>
@@ -47,6 +57,7 @@ export default {
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+  color: black;
 }
 .date {
   height: 150px;
