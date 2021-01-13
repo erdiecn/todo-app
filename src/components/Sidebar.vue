@@ -6,22 +6,30 @@
         <font-awesome-icon :icon="['fas', 'check']" class="icon" id="icon-green" />
         <p>Completed</p>
       </div>
-      <div class="menu-label" id="priority">
+      <!-- <div class="menu-label" id="priority">
         <font-awesome-icon :icon="['fas', 'bookmark']" class="icon" id="icon-purple" />
         <p>Priority</p>
-      </div>
+      </div>-->
       <div class="menu-label" id="all-lists">
         <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" id="icon-blue" />
         <p>All Lists</p>
       </div>
-      <div class="menu-label" id="lists">
+      <strong class="menu-label" id="lists">
         <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" />
         <p>Class Lists</p>
-      </div>
-      <div class="menu-label" id="lists">
+      </strong>
+      <ul class="menu-list">
+        <MenuItem
+          v-for="list in this.$store.getters.classFilterList"
+          :key="`list-${list.id}`"
+          :listId="list.id"
+          :listTitle="list.title"
+        />
+      </ul>
+      <strong class="menu-label" id="lists">
         <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" />
         <p>My Lists</p>
-      </div>
+      </strong>
       <ul class="menu-list">
         <MenuItem
           v-for="list in this.$store.getters.allLists"
@@ -37,7 +45,7 @@
         </button>
       </router-link>
       <router-link to="/add">
-        <button class="button is-primary" v-on:click="filterLists()">
+        <button class="button is-primary">
           <font-awesome-icon :icon="['fas', 'plus']" class="icon-button" />
           <p id="button-text">Add List</p>
         </button>
@@ -49,13 +57,15 @@
 <script>
 import MenuItem from "./MenuItem";
 import DateDisplay from "../components/DateDisplay";
+// import func from "../../vue-temp/vue-editor-bridge";
 
 export default {
   name: "Sidebar",
 
   data() {
     return {
-      checkedLists: []
+      checkedLists: [],
+      classFilter: []
     };
   },
 
@@ -65,7 +75,7 @@ export default {
   },
 
   mounted() {
-    console.log("state in component", this.$store.state.lists); //logs Object {__ob__: Observer}
+    //logs Object {__ob__: Observer}
   },
 
   methods: {
@@ -101,14 +111,16 @@ export default {
 
   flex-direction: column;
 
-  height: 100vh;
-
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #f5f6f7;
 
   /* padding-top: 20px; */
   padding-left: 40px;
   width: 25vw;
   color: rgb(51, 63, 72);
+  /* margin-top: 50px; */
 }
 .menu-label {
   display: flex;
@@ -132,10 +144,8 @@ export default {
 .date {
   height: 75px;
   /* background-color: #fdf8ef; */
-  /* margin-left: -10px; */
+  margin-left: -10px;
   width: 20vw;
-
-  overflow: hidden;
 }
 
 #button-text {

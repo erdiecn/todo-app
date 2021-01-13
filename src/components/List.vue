@@ -3,9 +3,7 @@
     <div class="container">
       <div class="container-head">
         <h1 class="title">{{ listTitle }}</h1>
-        <button class="button is-small" v-on:click="deactivateList(listId)">
-          Delete List
-        </button>
+        <button class="button is-small" v-on:click="deactivateList(listId)">Delete List</button>
       </div>
       <div class="content">
         <div class="list">
@@ -54,7 +52,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container-head {
-  border-bottom: solid 0.5px;
+  border-bottom: 1px solid rgba(7, 7, 7, 0.1);
   display: flex;
   margin-bottom: 30px;
 }

@@ -17,6 +17,7 @@ export default {
   computed: {
     displayDate() {
       var d = new Date();
+      console.log("d", d);
       var newMonth = d.getMonth();
       var newDay = new Date().toJSON().slice(8, 10);
 
@@ -80,7 +81,6 @@ export default {
 <style scoped lang="scss">
 @import "../assets/main.scss";
 .body {
-  height: 75px;
   margin: none;
   /* width: 100%; */
 

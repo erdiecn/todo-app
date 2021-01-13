@@ -10,6 +10,8 @@ export const store = new Vuex.Store({
     loading: true,
     checkedLists: [],
     filterLists: [],
+    completedItems: [],
+    classFilterLists: [],
     user_id: 1
   },
 
@@ -17,7 +19,8 @@ export const store = new Vuex.Store({
     allLists: state => state.lists,
     isLoading: state => state.loading,
     checkedLists: state => state.checkedLists,
-    filterLists: state => state.filterLists
+    filterLists: state => state.filterLists,
+    classFilterLists: state => state.classFilterLists
   },
 
   actions: {
@@ -28,7 +31,7 @@ export const store = new Vuex.Store({
           { user_id: 1 },
           { withCredentials: true }
         );
-        console.log(result, "login result");
+        console.log(result, "login result"); //// this needs to stay
       } catch (err) {
         console.log(err);
       }
@@ -42,7 +45,27 @@ export const store = new Vuex.Store({
         });
         commit("setLists", result.data.lists);
         commit("setLoaded");
-        console.log("fetch", result.data.lists);
+        // console.log("fetch", result.data.lists);
+        // console.log("stats", this.state.lists);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    ///fetch lists, filter by class
+    async fetchClassLists() {
+      try {
+        const result = await axios.get("http://localhost:3000/lists", {
+          withCredentials: true
+        });
+        const classResult = result.data.lists.filter(function(list) {
+          return list.class_id != null;
+        });
+        console.log(classResult, "class filter result");
+
+        // commit("setLists", result.data.lists);
+        // commit("setLoaded");
+        console.log("fetch class", result.data.lists);
         // console.log("stats", this.state.lists);
       } catch (err) {
         console.log(err);
@@ -72,7 +95,7 @@ export const store = new Vuex.Store({
           },
           { withCredentials: true }
         );
-        console.log(result.data, "post to items");
+        // console.log(result.data, "post to items");
         commit("addItem", result.data.item);
       } catch (err) {
         console.log(err);
@@ -89,7 +112,7 @@ export const store = new Vuex.Store({
           payload,
           { withCredentials: true }
         );
-        console.log(result.data, "patch complete status");
+        console.log(result.data, "patch complete status"); ///this needs to stay
         commit("completeItem", payload);
       } catch (err) {
         console.log(err);
@@ -102,7 +125,7 @@ export const store = new Vuex.Store({
           `http://localhost:3000/item/${itemId}`,
           { withCredentials: true }
         );
-        console.log("result", result);
+        console.log("result", result); ///this needs to stay
         commit("deleteItem", itemId);
       } catch (err) {
         console.log(err);
@@ -115,7 +138,7 @@ export const store = new Vuex.Store({
           `http://localhost:3000/lists/${listId}1`,
           { withCredentials: true }
         );
-        console.log("result", result);
+        console.log("result", result); /// this needs to stay
         commit("deleteList", listId);
       } catch (err) {
         console.log(err);
@@ -137,7 +160,7 @@ export const store = new Vuex.Store({
 
         return isChecked;
       });
-      console.log(result, "the result");
+      // console.log(result, "the result");
       state.commit("filteredLists", result);
     }
   },
@@ -202,11 +225,11 @@ export const store = new Vuex.Store({
     },
 
     removeCheckedLists: (state, listId) => {
-      console.log("remove", state.checkedLists, "v", listId.value);
+      // console.log("remove", state.checkedLists, "v", listId.value);
 
       const result = state.checkedLists.filter(list => list !== listId.value); /// need to remove the clicked
       state.checkedLists = result;
-      console.log(result, "deletecheckedLists");
+      // console.log(result, "deletecheckedLists");
     }
   }
 });

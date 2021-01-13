@@ -1,8 +1,14 @@
 <template>
   <div class="list-item" v-bind:class="{ 'is-complete': itemComplete }">
     <p>
-      <input class="checkmark" type="checkbox" v-on:click="markComplete()" />
+      <!-- <input class="checkmark" type="checkbox" v-on:click="markComplete()" /> -->
       {{ itemText }}
+      <button class="button is-small" v-on:click="markComplete()">
+        <font-awesome-icon :icon="['fas', 'check']" />
+      </button>
+      <button class="button is-small">
+        <font-awesome-icon :icon="['fas', 'bookmark']" />
+      </button>
       <button class="button is-small" v-on:click="deactivate(itemId)">X</button>
     </p>
   </div>
@@ -98,10 +104,10 @@ export default {
 
 .button {
   background: none;
-  color: inherit;
+  color: black;
   border: none;
-  position: absolute;
-  right: 0;
+  /* position: absolute;
+  right: 0; */
   font: inherit;
   cursor: pointer;
   outline: inherit;
