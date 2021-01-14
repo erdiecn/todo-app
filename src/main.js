@@ -16,7 +16,9 @@ import { faFilter as fasFilter } from "@fortawesome/free-solid-svg-icons";
 import { faSquare as farSquare } from "@fortawesome/free-regular-svg-icons";
 import { faSquare as fasSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash as fasTrash } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown as fasAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import VCalendar from "v-calendar";
 
 require("@/assets/main.scss");
 
@@ -28,10 +30,15 @@ library.add(
   fasCheck,
   fasBookmark,
   fasListUl,
-  fasTrash
+  fasTrash,
+  fasAngleDown
 );
 
 Vue.use(VueRouter);
+Vue.use(VCalendar, {
+  componentPrefix: "vc" // Use <vc-calendar /> instead of <v-calendar />
+  // ...other defaults
+});
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

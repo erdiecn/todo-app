@@ -53,7 +53,7 @@ export const store = new Vuex.Store({
     },
 
     ///fetch lists, filter by class
-    async fetchClassLists() {
+    async fetchClassLists({ commit }) {
       try {
         const result = await axios.get("http://localhost:3000/lists", {
           withCredentials: true
@@ -63,10 +63,7 @@ export const store = new Vuex.Store({
         });
         console.log(classResult, "class filter result");
 
-        // commit("setLists", result.data.lists);
-        // commit("setLoaded");
-        console.log("fetch class", result.data.lists);
-        // console.log("stats", this.state.lists);
+        commit("filterClassLists", classResult);
       } catch (err) {
         console.log(err);
       }
@@ -171,6 +168,9 @@ export const store = new Vuex.Store({
     setLoaded: state => (state.loading = false),
 
     filteredLists: (state, result) => (state.filterLists = result),
+
+    filterClassLists: (state, classResult) =>
+      (state.classFilterLists = classResult),
 
     // setFilter: state => ,
 
