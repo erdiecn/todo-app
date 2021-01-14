@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="field">
-      <label class="label"> New Todo Item</label>
+      <label class="label">New Todo Item</label>
       <div class="control">
         <input
-          class="input "
+          class="input"
           type="text"
           v-model="newItem"
           v-on:keyup.enter="getNewItem()"
@@ -18,8 +18,8 @@
       <div class="control">
         <div class="select">
           <select>
-            <option> Personal </option>
-            <option> Personal </option>
+            <option>Personal</option>
+            <option>Personal</option>
           </select>
         </div>
       </div>
@@ -36,25 +36,22 @@
               :key="`list-${list.id}`"
               :listId="list.id"
               :listTitle="list.title"
-              >{{ list.title }}
-            </option>
+            >{{ list.title }}</option>
           </select>
         </div>
       </div>
     </div>
 
     <div class="field">
-      <label class="label"> Choose Due Date and Time</label>
+      <label class="label">Choose Due Date and Time</label>
       <div class="control">
-        <vc-date-picker v-model="selectedDate" />
+        <vc-date-picker v-model="selectedDate" mode="dateTime" :timezone="timezone" />
       </div>
     </div>
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-primary" v-on:keyup.enter="getNewItem()">
-          Submit
-        </button>
+        <button class="button is-primary" v-on:keyup.enter="getNewItem()">Submit</button>
       </div>
       <div class="control">
         <button class="button is-link is-light">Cancel</button>
