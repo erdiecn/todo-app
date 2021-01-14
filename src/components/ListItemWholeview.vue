@@ -5,7 +5,7 @@
     </div>
     <!-- use bluma columns to fix the layout -->
     <div class="column">
-      <p>{{ itemDueDate }}</p>
+      <p>{{ itemDueDate | moment }}</p>
     </div>
     <div class="column">
       <p class="help">{{ listTitle }}</p>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: "ListItemWholeview",
 
@@ -29,7 +31,7 @@ export default {
     itemText: String,
     itemComplete: Boolean,
     listTitle: String,
-    itemDueDate: String
+    itemDueDate: Date
   },
 
   methods: {
@@ -43,6 +45,14 @@ export default {
         complete: this.itemComplete
       };
       this.$store.dispatch("completeItem", payload);
+    },
+    moment: function (date) {
+      return moment(date);
+    },
+  },
+  filters: {
+    moment: function (date) {
+      return moment(date).format('YYYY/MM/DD, h:mm a');
     }
   },
   computed: {
