@@ -27,4 +27,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.section {
+  /* background-color: blueviolet; */
+  width: 100%;
+}
 </style>
