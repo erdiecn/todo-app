@@ -205,6 +205,8 @@ export const store = new Vuex.Store({
       state.lists[listKey].items.push({
         id: payload.id,
         text: payload.text,
+        personal: payload.personal,
+        due_date: payload.due_date,
         active: payload.active,
         complete: payload.complete,
         list_id: payload.list_id
