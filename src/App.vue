@@ -28,6 +28,7 @@ export default {
     this.getLogin();
     this.getList();
     this.getClassList();
+    this.getPersonalList();
     console.log("state in component", this.$store.state.lists);
   },
 
@@ -40,8 +41,10 @@ export default {
       this.$store.dispatch("fetchLists");
     },
     getClassList: function() {
-      console.log("filter class called");
       this.$store.dispatch("fetchClassLists");
+    },
+    getPersonalList: function() {
+      this.$store.dispatch("fetchPersonalLists");
     }
   }
 };

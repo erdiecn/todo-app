@@ -3,11 +3,7 @@
     <DateDisplay class="date" />
     <aside class="menu">
       <div class="menu-label" id="completed">
-        <font-awesome-icon
-          :icon="['fas', 'check']"
-          class="icon"
-          id="icon-green"
-        />
+        <font-awesome-icon :icon="['fas', 'check']" class="icon" id="icon-green" />
         <p>Completed</p>
       </div>
       <!-- <div class="menu-label" id="priority">
@@ -15,11 +11,7 @@
         <p>Priority</p>
       </div>-->
       <div class="menu-label" id="all-lists">
-        <font-awesome-icon
-          :icon="['fas', 'list-ul']"
-          class="icon"
-          id="icon-blue"
-        />
+        <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" id="icon-blue" />
         <p>All Lists</p>
       </div>
       <strong class="menu-label" id="lists">
@@ -40,7 +32,7 @@
       </strong>
       <ul class="menu-list">
         <MenuItem
-          v-for="list in this.$store.getters.allLists"
+          v-for="list in this.$store.getters.personalFilterLists"
           :key="`list-${list.id}`"
           :listId="list.id"
           :listTitle="list.title"

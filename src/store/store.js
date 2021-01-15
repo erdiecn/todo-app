@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
     filterLists: [],
     completedItems: [],
     classFilterLists: [],
+    personalFilterLists: [],
     user_id: 1
   },
 
@@ -20,7 +21,8 @@ export const store = new Vuex.Store({
     isLoading: state => state.loading,
     checkedLists: state => state.checkedLists,
     filterLists: state => state.filterLists,
-    classFilterLists: state => state.classFilterLists
+    classFilterLists: state => state.classFilterLists,
+    personalFilterLists: state => state.personalFilterLists
   },
 
   actions: {
@@ -45,6 +47,7 @@ export const store = new Vuex.Store({
         });
         commit("setLists", result.data.lists);
         commit("setLoaded");
+
         // console.log("fetch", result.data.lists);
         // console.log("stats", this.state.lists);
       } catch (err) {
@@ -61,9 +64,21 @@ export const store = new Vuex.Store({
         const classResult = result.data.lists.filter(function(list) {
           return list.class_id != null;
         });
-        console.log(classResult, "class filter result");
-
         commit("filterClassLists", classResult);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async fetchPersonalLists({ commit }) {
+      try {
+        const result = await axios.get("http://localhost:3000/lists", {
+          withCredentials: true
+        });
+        const personalResult = result.data.lists.filter(function(list) {
+          return list.class_id == null;
+        });
+        commit("filterPersonalLists", personalResult);
       } catch (err) {
         console.log(err);
       }
@@ -172,6 +187,9 @@ export const store = new Vuex.Store({
     filterClassLists: (state, classResult) =>
       (state.classFilterLists = classResult),
 
+    filterPersonalLists: (state, personalResult) =>
+      (state.personalFilterLists = personalResult),
+
     // setFilter: state => ,
 
     addList: (state, list) => {
@@ -206,6 +224,7 @@ export const store = new Vuex.Store({
       });
       state.lists = newLists;
     },
+
     deleteItem: (state, itemId) => {
       const newLists = state.lists.map(list => {
         const newItems = list.items.filter(item => item.id != itemId);
