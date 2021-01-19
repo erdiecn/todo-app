@@ -4,7 +4,7 @@
     <aside class="menu">
       <div class="menu-label" id="completed">
         <font-awesome-icon :icon="['fas', 'check']" class="icon" id="icon-green" />
-        <p>Completed</p>
+        <p>Completed Items</p>
       </div>
       <!-- <div class="menu-label" id="priority">
         <font-awesome-icon :icon="['fas', 'bookmark']" class="icon" id="icon-purple" />
@@ -12,7 +12,7 @@
       </div>-->
       <div class="menu-label" id="all-lists">
         <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" id="icon-blue" />
-        <p>All Lists</p>
+        <p>All Items</p>
       </div>
       <strong class="menu-label" id="lists">
         <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" />
@@ -111,7 +111,7 @@ export default {
 
   flex-direction: column;
 
-  height: 100%;
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #f5f6f7;

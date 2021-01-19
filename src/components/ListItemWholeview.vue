@@ -2,26 +2,30 @@
   <div class="columns" id="list-item" v-bind:class="{ 'is-complete': itemComplete }">
     <div class="column">
       <p>{{ itemText }}</p>
+      <p class="help">
+        In list
+        <strong>{{ listTitle }}</strong>
+      </p>
     </div>
+
     <!-- use bluma columns to fix the layout -->
     <div class="column">
-      <p>{{ itemDueDate | moment }}</p>
+      <p>Due on {{ itemDueDate | moment }}</p>
     </div>
     <div class="column">
-      <p class="help">{{ listTitle }}</p>
+      <button class="button is-small" id="complete-button" v-on:click="markComplete()">
+        <font-awesome-icon id="icon" :icon="['fas', 'check']" v-if="itemComplete == false" />
+        <font-awesome-icon id="icon" :icon="['fas', 'square']" v-else />
+      </button>
+      <button class="button is-small" id="delete-button" v-on:click="deactivate(itemId)">
+        <font-awesome-icon id="icon" :icon="['fas', 'trash']" />
+      </button>
     </div>
-    <button class="button is-small" id="complete-button" v-on:click="markComplete()">
-      <font-awesome-icon id="icon" :icon="['fas', 'check']" v-if="itemComplete == false" />
-      <font-awesome-icon id="icon" :icon="['fas', 'square']" v-else />
-    </button>
-    <button class="button is-small" id="delete-button" v-on:click="deactivate(itemId)">
-      <font-awesome-icon id="icon" :icon="['fas', 'trash']" />
-    </button>
   </div>
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   name: "ListItemWholeview",
@@ -46,43 +50,16 @@ export default {
       };
       this.$store.dispatch("completeItem", payload);
     },
-    moment: function (date) {
+    moment: function(date) {
       return moment(date);
-    },
+    }
   },
   filters: {
-    moment: function (date) {
-      return moment(date).format('YYYY/MM/DD, h:mm a');
+    moment: function(date) {
+      return moment(date).format("MM/DD/YYYY, h:mm a");
     }
   },
-  computed: {
-    displayDate() {
-      var d = this.itemDueDate;
-      console.log("d", d);
-      var newMonth = d.getMonth();
-      var newDay = this.itemDueDate.toJSON().slice(8, 10);
-
-      var newYear = this.itemDueDate.toJSON().slice(0, 4);
-
-      var month = new Array(12);
-      month[0] = "January";
-      month[1] = "Febuary";
-      month[2] = "March";
-      month[3] = "April";
-      month[4] = "May";
-      month[5] = "June";
-      month[6] = "July";
-      month[7] = "August";
-      month[8] = "September";
-      month[9] = "October";
-      month[10] = "November";
-      month[11] = "December";
-
-      var showMonth = month[newMonth] + " " + newDay + ", " + newYear;
-
-      return showMonth;
-    }
-  }
+  computed: {}
 };
 </script>
 
@@ -110,7 +87,7 @@ export default {
 
 #delete-button {
   margin-right: 0;
-  color: red;
+  color: $primary;
 }
 #complete-button {
   right: 0;

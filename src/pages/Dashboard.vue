@@ -25,7 +25,7 @@
       <section class="hero">
         <div id="hero-body">
           <div class="container">
-            <h1 class="title">All Lists</h1>
+            <h1 class="title">All Items</h1>
           </div>
         </div>
       </section>
@@ -47,7 +47,7 @@
       </div>
       <button
         type="checkbox"
-        class="button is-bold is-light"
+        class="button is-bold is-primary"
         id="modal-button"
         @click="showModal"
       >Add a New Todo Item!</button>
@@ -96,7 +96,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+@import "../assets/main.scss";
+
 .body {
   height: 100vh;
   overflow-y: auto;
@@ -116,6 +118,7 @@ img {
 }
 
 .hero {
+  margin-top: 70px;
   margin-bottom: 5px;
   border-bottom: 1px solid rgba(7, 7, 7, 0.1);
   /* background-color: blue; */
@@ -128,6 +131,7 @@ img {
 h1 {
   font-size: 30px;
   border-bottom: 1px;
+  /* color: $primary !important; */
 }
 
 #list-all {
