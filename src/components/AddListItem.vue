@@ -27,7 +27,7 @@
       </div>-->
 
       <div class="column">
-        <label class="label">Which list will this item be added?</label>
+        <label class="label">Which list will this item be added to?</label>
         <div class="control">
           <div class="select">
             <select v-model="listId">

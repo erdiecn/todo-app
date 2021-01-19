@@ -1,8 +1,13 @@
 <template>
   <section class="section">
-    <div class="container">
-      <input class="input" v-model="newList" placeholder="Add new TodoList!" />
-      <button class="button is-primary" v-on:click="getNewList()">Submit</button>
+    <div class="columns">
+      <div class="column"></div>
+      <input
+        class="input is-primary column is-two-thirds"
+        v-model="newList"
+        placeholder="Add new TodoList!"
+      />
+      <button class="button is-primary column" v-on:click="getNewList()">Submit</button>
     </div>
   </section>
 </template>
@@ -29,6 +34,11 @@ export default {
 <style scoped>
 .section {
   /* background-color: blueviolet; */
+
   width: 100%;
+}
+
+button {
+  margin-left: 20px;
 }
 </style>

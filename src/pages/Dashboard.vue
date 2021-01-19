@@ -1,11 +1,13 @@
 <template>
   <div class="body">
-    <div v-if="0 !== 0">
-      <section id="loading-hero" class="is-bold">
+    <div v-if="0 == 0">
+      <section id="loading">
         <div class="hero-body">
           <div class="container">
             <h1 class="title">Oh no, you don't have any lists yet!</h1>
-            <h2 class="subtitle">Click the Add Lists button to add your first list.</h2>
+            <img src="../assets/undraw_Up_to_date_re_nqid.svg" />
+            <h2 class="subtitle">Add your first list here or click the add list button</h2>
+            <AddList />
           </div>
         </div>
       </section>
@@ -58,7 +60,7 @@
 
 <script>
 // import List from "../components/List";
-// import AddList from "../components/AddList";
+import AddList from "../components/AddList";
 import AddListItem from "../components/AddListItem";
 import ListItemWholeview from "../components/ListItemWholeview";
 
@@ -66,7 +68,7 @@ export default {
   name: "Dashboard",
 
   components: {
-    // AddList,
+    AddList,
     ListItemWholeview,
     AddListItem
 
@@ -101,10 +103,16 @@ export default {
   overflow-x: hidden;
   color: black;
 }
-#loading-hero {
-  height: 100% !important;
-  background-color: brown;
-  color: chartreuse;
+#loading {
+  height: 100vh !important;
+  text-align: center;
+  /* background-color: brown; */
+  /* color: chartreuse; */
+}
+
+img {
+  width: 200px;
+  margin: 20px;
 }
 
 .hero {
