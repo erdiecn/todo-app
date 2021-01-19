@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <div v-if="0 == 0">
+    <div v-if="this.$store.getters.allLists == null">
       <section id="loading">
         <div class="hero-body">
           <div class="container">
