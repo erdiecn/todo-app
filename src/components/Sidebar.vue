@@ -10,10 +10,12 @@
         <font-awesome-icon :icon="['fas', 'bookmark']" class="icon" id="icon-purple" />
         <p>Priority</p>
       </div>-->
-      <div class="menu-label" id="all-lists">
-        <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" id="icon-blue" />
-        <p>All Items</p>
-      </div>
+      <router-link to="/">
+        <div class="menu-label" id="all-lists">
+          <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" id="icon-blue" />
+          <p>All Items</p>
+        </div>
+      </router-link>
       <strong class="menu-label" id="lists">
         <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" />
         <p>Class Lists</p>

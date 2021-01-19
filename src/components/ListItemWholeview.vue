@@ -35,7 +35,7 @@ export default {
     itemText: String,
     itemComplete: Boolean,
     listTitle: String,
-    itemDueDate: Date
+    itemDueDate: String
   },
 
   methods: {

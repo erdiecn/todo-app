@@ -26,6 +26,7 @@
         <div id="hero-body">
           <div class="container">
             <h1 class="title">All Items</h1>
+            <img source="../assets/undraw_To_do_list_re_9nt7.svg" />
           </div>
         </div>
       </section>
