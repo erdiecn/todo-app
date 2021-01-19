@@ -12,50 +12,47 @@
         />
       </div>
     </div>
+    <div class="columns">
+      <!-- <div class="column">
+        <label class="label">Will this be a class todo list or a personal todo list?</label>
+        <div class="control">
+          <div class="select">
+            <select v-model="personal">
+              <option disabled value>Please select one</option>
+              <option value="1">Personal Todo List</option>
+              <option value="0">Class Todo List</option>
+            </select>
+          </div>
+        </div>
+      </div>-->
 
-    <div class="field">
-      <label class="label">Personal vs Public</label>
-      <div class="control">
-        <div class="select">
-          <select v-model="personal">
-            <option disabled value="">Please select one</option>
-            <option value="1">Personal</option>
-            <option value="0">Public</option>
-          </select>
+      <div class="column">
+        <label class="label">Which list will this item be added?</label>
+        <div class="control">
+          <div class="select">
+            <select v-model="listId">
+              <option disabled value>Please select one</option>
+              <option
+                class="dropdown-item"
+                v-for="list in this.$store.getters.allLists"
+                :key="`list-${list.id}`"
+                v-bind:value="list.id"
+              >{{ list.title }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <label class="label">Choose Due Date and Time</label>
+        <div class="control">
+          <vc-date-picker v-model="selectedDate" mode="dateTime" />
         </div>
       </div>
     </div>
-
-    <div class="field">
-      <label class="label">Choose list to add item</label>
-      <div class="control">
-        <div class="select">
-          <select v-model="listId">
-            <option disabled value="">Please select one</option>
-            <option
-              class="dropdown-item"
-              v-for="list in this.$store.getters.allLists"
-              :key="`list-${list.id}`"
-              v-bind:value="list.id"
-              >{{ list.title }}</option
-            >
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Choose Due Date and Time</label>
-      <div class="control">
-        <vc-date-picker v-model="selectedDate" mode="dateTime" />
-      </div>
-    </div>
-
     <div class="field is-grouped">
       <div class="control">
-        <button class="button " v-on:click="getNewItem()">
-          Submit
-        </button>
+        <button class="button" v-on:click="getNewItem()">Submit</button>
       </div>
       <div class="control">
         <button class="button is-light" @click="close">Cancel</button>

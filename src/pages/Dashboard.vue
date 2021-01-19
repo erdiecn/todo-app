@@ -4,12 +4,8 @@
       <section id="loading-hero" class="is-bold">
         <div class="hero-body">
           <div class="container">
-            <h1 class="title">
-              Oh no, you don't have any lists yet!
-            </h1>
-            <h2 class="subtitle">
-              Click the Add Lists button to add your first list.
-            </h2>
+            <h1 class="title">Oh no, you don't have any lists yet!</h1>
+            <h2 class="subtitle">Click the Add Lists button to add your first list.</h2>
           </div>
         </div>
       </section>
@@ -47,15 +43,14 @@
           :listTitle="list.title"
         />
       </div>
-      <button type="button" class="button is-bold is-light" @click="showModal">
-        Add a New Todo List!
-      </button>
+      <button
+        type="checkbox"
+        class="button is-bold is-light"
+        id="modal-button"
+        @click="showModal"
+      >Add a New Todo Item!</button>
       <div>
-        <AddListItem
-          v-show="isModalVisible"
-          @close="closeModal"
-          :listId="listId"
-        />
+        <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
       </div>
     </div>
   </div>
@@ -86,9 +81,13 @@ export default {
   methods: {
     showModal() {
       this.isModalVisible = true;
+      var x = document.getElementById("modal-button");
+      x.style.display = "none";
     },
     closeModal() {
       this.isModalVisible = false;
+      var x = document.getElementById("modal-button");
+      x.style.display = "block";
     }
   }
 };
