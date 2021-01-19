@@ -1,7 +1,18 @@
 <template>
   <div class="body">
-    <div v-if="!0 == 0">
-      <h1>Loading</h1>
+    <div v-if="0 !== 0">
+      <section id="loading-hero" class="is-bold">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              Oh no, you don't have any lists yet!
+            </h1>
+            <h2 class="subtitle">
+              Click the Add Lists button to add your first list.
+            </h2>
+          </div>
+        </div>
+      </section>
     </div>
     <div v-else>
       <!-- <List
@@ -14,7 +25,7 @@
       />-->
       <!-- :listItems="list.items"  -->
       <section class="hero">
-        <div class="hero-body">
+        <div id="hero-body">
           <div class="container">
             <h1 class="title">All Lists</h1>
           </div>
@@ -36,10 +47,16 @@
           :listTitle="list.title"
         />
       </div>
+      <button type="button" class="button is-bold is-light" @click="showModal">
+        Add a New Todo List!
+      </button>
       <div>
-        <AddListItem :listId="listId" />
+        <AddListItem
+          v-show="isModalVisible"
+          @close="closeModal"
+          :listId="listId"
+        />
       </div>
-      <!-- <AddList /> -->
     </div>
   </div>
 </template>
@@ -48,7 +65,6 @@
 // import List from "../components/List";
 // import AddList from "../components/AddList";
 import AddListItem from "../components/AddListItem";
-
 import ListItemWholeview from "../components/ListItemWholeview";
 
 export default {
@@ -61,6 +77,19 @@ export default {
 
     // ListItemWholeview
     // DateDisplay
+  },
+  data() {
+    return {
+      isModalVisible: false
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }
   }
 };
 </script>
@@ -73,13 +102,19 @@ export default {
   overflow-x: hidden;
   color: black;
 }
+#loading-hero {
+  height: 100% !important;
+  background-color: brown;
+  color: chartreuse;
+}
+
 .hero {
   margin-bottom: 5px;
   border-bottom: 1px solid rgba(7, 7, 7, 0.1);
   /* background-color: blue; */
 }
 
-.hero-body {
+#hero-body {
   height: 40px;
 }
 

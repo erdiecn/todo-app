@@ -19,8 +19,8 @@
         <div class="select">
           <select v-model="personal">
             <option disabled value="">Please select one</option>
-            <option value=1>Personal</option>
-            <option value=0>Public</option>
+            <option value="1">Personal</option>
+            <option value="0">Public</option>
           </select>
         </div>
       </div>
@@ -37,12 +37,12 @@
               v-for="list in this.$store.getters.allLists"
               :key="`list-${list.id}`"
               v-bind:value="list.id"
-            >{{ list.title }}</option>
+              >{{ list.title }}</option
+            >
           </select>
         </div>
       </div>
     </div>
-
 
     <div class="field">
       <label class="label">Choose Due Date and Time</label>
@@ -53,10 +53,12 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-primary"  v-on:click="getNewItem()">Submit</button>
+        <button class="button " v-on:click="getNewItem()">
+          Submit
+        </button>
       </div>
       <div class="control">
-        <button class="button is-link is-light">Cancel</button>
+        <button class="button is-light" @click="close">Cancel</button>
       </div>
       <!-- </div> -->
     </div>
@@ -66,22 +68,31 @@
 <script>
 export default {
   name: "AddListItem",
-  props: {
-    
-  },
+  props: {},
   data() {
     return {
       newItem: "",
       personal: "",
-      listId: "", 
+      listId: "",
       selectedDate: null,
+      showModal: false
     };
   },
   methods: {
+    close() {
+      this.$emit("close");
+    },
     getNewItem: function() {
-      const payload = { list_id: this.listId, text: this.newItem, personal: this.personal, due_date: this.selectedDate };
+      const payload = {
+        list_id: this.listId,
+        text: this.newItem,
+        personal: this.personal,
+        due_date: this.selectedDate
+      };
       this.$store.dispatch("addItem", payload);
       this.newItem = "";
+
+      this.$emit("close");
     }
   }
 };
