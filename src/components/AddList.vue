@@ -6,6 +6,7 @@
         class="input is-primary column is-two-thirds"
         v-model="newList"
         placeholder="Add new TodoList!"
+        v-on:keyup.enter.prevent="getNewList()"
       />
       <button class="button is-primary column" v-on:click="getNewList()">Submit</button>
     </div>
@@ -23,8 +24,10 @@ export default {
   },
   methods: {
     getNewList: function() {
+      event.preventDefault();
       this.$store.dispatch("addList", this.newList);
       this.newList = "";
+      this.$store.dispatch("fetchPersonalLists");
     }
   }
 };

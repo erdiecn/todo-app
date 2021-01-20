@@ -160,6 +160,7 @@ export const store = new Vuex.Store({
     updateFilterLists: (state, listId) => {
       if (listId.checked) {
         state.commit("addCheckedLists", listId);
+        // console.log("listId", listId);
       } else {
         state.commit("removeCheckedLists", listId);
       }
@@ -172,7 +173,7 @@ export const store = new Vuex.Store({
 
         return isChecked;
       });
-      // console.log(result, "the result");
+      console.log(result, "the result");
       state.commit("filteredLists", result);
     }
   },

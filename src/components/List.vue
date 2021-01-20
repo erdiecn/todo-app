@@ -1,12 +1,11 @@
 <template>
-  <section class="section">
+  <div>
     <div class="container">
       <div class="container-head">
-        <h1 class="title">{{ listTitle }}</h1>
-        <button class="button is-small" v-on:click="deactivateList(listId)">Delete List</button>
+        <h3>{{ listTitle }}</h3>
       </div>
       <div class="content">
-        <div class="list">
+        <div>
           <ListItem
             v-for="item in listItems"
             :key="`item-${item.id}`"
@@ -17,16 +16,16 @@
           />
         </div>
         <div>
-          <AddListItem :listId="listId" />
+          <!-- <AddListItem :listId="listId" /> -->
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import ListItem from "./ListItem";
-import AddListItem from "./AddListItem";
+// import AddListItem from "./AddListItem";
 
 export default {
   name: "List",
@@ -37,8 +36,8 @@ export default {
   },
 
   components: {
-    ListItem,
-    AddListItem
+    ListItem
+    // AddListItem
   },
 
   methods: {

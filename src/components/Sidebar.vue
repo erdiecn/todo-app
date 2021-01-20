@@ -41,7 +41,7 @@
         />
       </ul>
       <router-link to="/sort">
-        <button class="button is-primary">
+        <button v-on:click="filterLists" class="button is-primary">
           <font-awesome-icon :icon="['fas', 'filter']" class="icon-button" />
           <p id="button-text">Filter</p>
         </button>
@@ -81,7 +81,8 @@ export default {
   },
 
   methods: {
-    filterLists: function() {
+    filterLists: function(event) {
+      event.preventDefault();
       this.$store.dispatch("filterLists");
       console.log("filter clicked");
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="columns" id="list-item" v-bind:class="{ 'is-complete': itemComplete }">
-    <div class="column">
+    <div class="column is-three-fifths">
       <p>{{ itemText }}</p>
       <p class="help">
         In list
@@ -10,7 +10,10 @@
 
     <!-- use bluma columns to fix the layout -->
     <div class="column">
-      <p>Due on {{ itemDueDate | moment }}</p>
+      <p id="due-date">
+        Due on
+        <strong>{{ itemDueDate | moment }}</strong>
+      </p>
     </div>
     <div class="column">
       <button class="button is-small" id="complete-button" v-on:click="markComplete()">
@@ -75,11 +78,11 @@ export default {
   /* background-color: aqua; */
 }
 
-/* button:hover {
+button:hover {
   border: 1px solid;
   border-color: $beige-light;
   padding: 5px;
-} */
+}
 
 /* .p {
   vertical-align: middle;
@@ -122,5 +125,9 @@ export default {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+#due-date {
+  font-size: 14px;
 }
 </style>

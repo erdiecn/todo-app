@@ -25,8 +25,19 @@
       <section class="hero">
         <div id="hero-body">
           <div class="container">
-            <h1 class="title">All Items</h1>
-            <img source="../assets/undraw_To_do_list_re_9nt7.svg" />
+            <div class="columns">
+              <div class="column">
+                <h1 class="title">All Items</h1>
+              </div>
+              <div>
+                <button
+                  type="checkbox"
+                  class="button is-primary"
+                  id="modal-button"
+                  @click="showModal"
+                >Add a New Todo Item!</button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -46,12 +57,7 @@
           :listTitle="list.title"
         />
       </div>
-      <button
-        type="checkbox"
-        class="button is-bold is-primary"
-        id="modal-button"
-        @click="showModal"
-      >Add a New Todo Item!</button>
+
       <div>
         <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
       </div>
@@ -78,7 +84,8 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false
+      isModalVisible: false,
+      listId: []
     };
   },
   methods: {
@@ -102,8 +109,8 @@ export default {
 
 .body {
   height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /* overflow-y: auto;
+  overflow-x: hidden; */
   color: black;
 }
 #loading {

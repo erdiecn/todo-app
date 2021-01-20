@@ -35,6 +35,7 @@ export default {
   methods: {
     updateFilterLists: function(e) {
       this.$store.dispatch("updateFilterLists", e.target);
+      console.log("called");
     }
   }
 };
