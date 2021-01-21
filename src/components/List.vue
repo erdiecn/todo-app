@@ -2,7 +2,9 @@
   <div>
     <div class="container">
       <div class="container-head">
-        <h3>{{ listTitle }}</h3>
+        <h1 class="list-title">
+          <strong>{{ listTitle }}</strong>
+        </h1>
       </div>
       <div class="content">
         <div>
@@ -50,15 +52,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.container {
+  padding-left: 20px;
+}
 .container-head {
   border-bottom: 1px solid rgba(7, 7, 7, 0.1);
   display: flex;
   margin-bottom: 30px;
+  margin-top: 30px;
 }
+
 .button {
   border: none;
   background: none;
   margin-top: -25px;
   margin-left: auto;
+}
+
+.list-title {
+  font-size: 20px;
 }
 </style>

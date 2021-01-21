@@ -1,6 +1,6 @@
 <template>
   <div class="columns" id="list-item" v-bind:class="{ 'is-complete': itemComplete }">
-    <div class="column is-three-fifths">
+    <div class="column is-half" id="item-text">
       <p>{{ itemText }}</p>
     </div>
 
@@ -27,7 +27,8 @@
 import moment from "moment";
 
 export default {
-  name: "ListItem",
+  name: "ListItemWholeview",
+
   props: {
     itemId: Number,
     itemText: String,
@@ -48,7 +49,6 @@ export default {
       };
       this.$store.dispatch("completeItem", payload);
     },
-
     moment: function(date) {
       return moment(date);
     }
@@ -57,7 +57,8 @@ export default {
     moment: function(date) {
       return moment(date).format("MM/DD/YYYY, h:mm a");
     }
-  }
+  },
+  computed: {}
 };
 </script>
 
@@ -71,6 +72,7 @@ export default {
   font-size: 18px;
   cursor: pointer;
   /* background-color: aqua; */
+  padding-left: 20px;
 }
 
 button:hover {
@@ -125,3 +127,4 @@ button:hover {
 #due-date {
   font-size: 14px;
 }
+</style>

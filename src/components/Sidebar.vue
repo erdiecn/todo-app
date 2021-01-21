@@ -2,10 +2,12 @@
   <div class="body">
     <DateDisplay class="date" />
     <aside class="menu">
-      <div class="menu-label" id="completed">
-        <font-awesome-icon :icon="['fas', 'check']" class="icon" id="icon-green" />
-        <p>Completed Items</p>
-      </div>
+      <router-link to="/completed">
+        <div class="menu-label" id="completed">
+          <font-awesome-icon :icon="['fas', 'check']" class="icon" id="icon-green" />
+          <p>Completed Items</p>
+        </div>
+      </router-link>
       <!-- <div class="menu-label" id="priority">
         <font-awesome-icon :icon="['fas', 'bookmark']" class="icon" id="icon-purple" />
         <p>Priority</p>
@@ -40,11 +42,13 @@
           :listTitle="list.title"
         />
       </ul>
-      <router-link to="/sort">
-        <button v-on:click="filterLists" class="button is-primary">
-          <font-awesome-icon :icon="['fas', 'filter']" class="icon-button" />
-          <p id="button-text">Filter</p>
-        </button>
+      <router-link to="/sort" v-on:click.native="filterLists">
+        <div>
+          <button class="button is-primary">
+            <font-awesome-icon :icon="['fas', 'filter']" class="icon-button" />
+            <p id="button-text">Filter</p>
+          </button>
+        </div>
       </router-link>
       <router-link to="/add">
         <button class="button is-primary">
@@ -119,7 +123,7 @@ export default {
   overflow-x: hidden;
   background-color: #f5f6f7;
 
-  /* padding-top: 20px; */
+  padding-top: 45px;
   padding-left: 40px;
   width: 25vw;
   color: rgb(51, 63, 72);
@@ -145,7 +149,7 @@ export default {
 }
 
 .date {
-  height: 75px;
+  height: 100px;
   /* background-color: #fdf8ef; */
   margin-left: -10px;
   width: 20vw;
@@ -181,6 +185,7 @@ p {
 }
 #completed {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #priority {

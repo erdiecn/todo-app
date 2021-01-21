@@ -1,11 +1,11 @@
 <template>
   <div>
-    <section class="hero">
+    <!-- <section class="hero">
       <div id="hero-body">
         <div class="container">
           <div class="columns">
             <div class="column">
-              <h1 class="title">All Items</h1>
+              <h1 class="title">Filterd Lists</h1>
             </div>
             <div>
               <button
@@ -14,12 +14,14 @@
                 id="modal-button"
                 @click="showModal"
               >Add a New Todo Item!</button>
-              <button class="button is-small" v-on:click="deactivateList(listId)">Delete List</button>
+            </div>
+            <div>
+              <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
 
     <!-- I just need it to get one list based off the above list id -->
     <List
@@ -46,6 +48,18 @@ export default {
 
   components: {
     List
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+      var x = document.getElementById("modal-button");
+      x.style.display = "none";
+    },
+    closeModal() {
+      this.isModalVisible = false;
+      var x = document.getElementById("modal-button");
+      x.style.display = "block";
+    }
   }
 
   // created() {

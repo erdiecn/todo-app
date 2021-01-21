@@ -22,7 +22,8 @@ export const store = new Vuex.Store({
     checkedLists: state => state.checkedLists,
     filterLists: state => state.filterLists,
     classFilterLists: state => state.classFilterLists,
-    personalFilterLists: state => state.personalFilterLists
+    personalFilterLists: state => state.personalFilterLists,
+    completedItems: state => state.completedItems
   },
 
   actions: {
@@ -220,9 +221,11 @@ export const store = new Vuex.Store({
           if (item.id == payload.id) {
             item.complete = payload.complete;
           }
+          console.log("completed", item);
           return item;
         });
         list.items = newItems;
+
         return list;
       });
       state.lists = newLists;
@@ -239,6 +242,7 @@ export const store = new Vuex.Store({
     deleteList: (state, listId) => {
       const newLists = state.lists.filter(list => list.id != listId);
       state.lists = newLists;
+      console.log("delete", newLists); /// this works to remove lists
     },
 
     addCheckedLists: (state, listId) => {

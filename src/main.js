@@ -5,6 +5,7 @@ import VueRouter from "vue-router";
 import Dashboard from "./pages/Dashboard.vue";
 import SortLists from "./pages/sortLists.vue";
 import AddList from "./components/AddList.vue";
+import CompletedItems from "./pages/CompletedItems.vue";
 import "bulma/css/bulma.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -47,7 +48,8 @@ Vue.config.productionTip = false;
 const routes = [
   { path: "/", component: Dashboard },
   { path: "/sort", name: "sort", component: SortLists },
-  { path: "/add", name: "add", component: AddList }
+  { path: "/add", name: "add", component: AddList },
+  { path: "/completed", name: "completed", component: CompletedItems }
 ];
 
 const router = new VueRouter({
