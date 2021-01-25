@@ -1,27 +1,25 @@
 <template>
-  <div>
-    <!-- <section class="hero">
+  <div class="body">
+    <section class="hero">
       <div id="hero-body">
         <div class="container">
           <div class="columns">
-            <div class="column">
-              <h1 class="title">Filterd Lists</h1>
-            </div>
+            <div class="column"></div>
             <div>
               <button
                 type="checkbox"
-                class="button is-primary"
+                class="button is-primary is-small"
                 id="modal-button"
                 @click="showModal"
-              >Add a New Todo Item!</button>
-            </div>
-            <div>
-              <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
+              >Add a New Task</button>
             </div>
           </div>
         </div>
       </div>
-    </section>-->
+    </section>
+    <div>
+      <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
+    </div>
 
     <!-- I just need it to get one list based off the above list id -->
     <List
@@ -38,7 +36,7 @@
 </template>
 <script>
 import List from "../components/List";
-// import AddList from "../components/AddList";
+import AddListItem from "../components/AddListItem";
 
 export default {
   name: "SortLists",
@@ -46,8 +44,15 @@ export default {
     itemId: Number
   },
 
+  data() {
+    return {
+      isModalVisible: false
+    };
+  },
+
   components: {
-    List
+    List,
+    AddListItem
   },
   methods: {
     showModal() {
@@ -101,8 +106,7 @@ img {
 .hero {
   margin-top: 70px;
   margin-bottom: 5px;
-  border-bottom: 1px solid rgba(7, 7, 7, 0.1);
-  /* background-color: blue; */
+  /* border-bottom: 1px solid rgba(7, 7, 7, 0.1); */
 }
 
 #hero-body {

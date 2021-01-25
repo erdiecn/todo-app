@@ -27,20 +27,26 @@
           <div class="container">
             <div class="columns">
               <div class="column">
-                <h1 class="title">All Items</h1>
-              </div>
-              <div>
-                <button
-                  type="checkbox"
-                  class="button is-primary"
-                  id="modal-button"
-                  @click="showModal"
-                >Add a New Todo Item!</button>
+                <h1>All Tasks</h1>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <div>
+        <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
+      </div>
+      <div>
+        <button
+          type="inputs"
+          class="button is-primary is-small"
+          id="modal-button"
+          @click="showModal"
+        >
+          <font-awesome-icon id="icon" :icon="['fas', 'plus']" />Add a New Task!
+        </button>
+      </div>
       <div
         class="container"
         id="list-all"
@@ -57,16 +63,11 @@
           :listTitle="list.title"
         />
       </div>
-
-      <div>
-        <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import List from "../components/List";
 import AddList from "../components/AddList";
 import AddListItem from "../components/AddListItem";
 import ListItemWholeview from "../components/ListItemWholeview";
@@ -78,9 +79,6 @@ export default {
     AddList,
     ListItemWholeview,
     AddListItem
-
-    // ListItemWholeview
-    // DateDisplay
   },
   data() {
     return {
@@ -151,5 +149,11 @@ h1 {
   height: 150px;
   /* background-color: #fdf8ef; */
   margin-left: -10px;
+}
+
+#modal-button {
+  margin-left: 25px;
+  width: 150px;
+  margin-top: 7px;
 }
 </style>

@@ -12,10 +12,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faListUl as fasListUl } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as fasBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faCheck as fasCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faPlus as fasPlus } from "@fortawesome/free-solid-svg-icons";
 import { faFilter as fasFilter } from "@fortawesome/free-solid-svg-icons";
-import { faSquare as farSquare } from "@fortawesome/free-regular-svg-icons";
-import { faSquare as fasSquare } from "@fortawesome/free-solid-svg-icons";
+import { faCircle as farCircle } from "@fortawesome/free-regular-svg-icons";
 import { faTrash as fasTrash } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown as fasAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -24,8 +24,8 @@ import VCalendar from "v-calendar";
 require("@/assets/main.scss");
 
 library.add(
-  fasSquare,
-  farSquare,
+  farCircle,
+  farCheckCircle,
   fasFilter,
   fasPlus,
   fasCheck,

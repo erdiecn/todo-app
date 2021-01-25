@@ -1,5 +1,9 @@
 <template>
   <div class="columns" id="list-item" v-bind:class="{ 'is-complete': itemComplete }">
+    <button class="button is-small" id="complete-button" v-on:click="markComplete()">
+      <font-awesome-icon id="icon" :icon="['far', 'circle']" v-if="itemComplete == false" />
+      <font-awesome-icon id="icon" :icon="['far', 'check-circle']" v-else />
+    </button>
     <div class="column is-half" id="item-text">
       <p>{{ itemText }}</p>
     </div>
@@ -12,10 +16,6 @@
       </p>
     </div>
     <div class="column">
-      <button class="button is-small" id="complete-button" v-on:click="markComplete()">
-        <font-awesome-icon id="icon" :icon="['fas', 'check']" v-if="itemComplete == false" />
-        <font-awesome-icon id="icon" :icon="['fas', 'square']" v-else />
-      </button>
       <button class="button is-small" id="delete-button" v-on:click="deactivate(itemId)">
         <font-awesome-icon id="icon" :icon="['fas', 'trash']" />
       </button>
@@ -68,18 +68,18 @@ export default {
 
 #list-item {
   display: flex;
-  margin-bottom: 10px;
-  font-size: 18px;
+  /* margin-bottom: 10px; */
+  font-size: 14px;
   cursor: pointer;
   /* background-color: aqua; */
   padding-left: 20px;
 }
 
-button:hover {
+/* button:hover {
   border: 1px solid;
   border-color: $beige-light;
   padding: 5px;
-}
+} */
 
 /* .p {
   vertical-align: middle;
@@ -87,12 +87,15 @@ button:hover {
 
 #delete-button {
   margin-right: 0;
+  margin-top: -5px;
   color: $primary;
 }
 #complete-button {
   right: 0;
   /* margin: 5px; */
   color: green;
+  margin-top: 5px;
+  margin-right: -15px;
 }
 .check-incomplete {
   margin-right: 5px;

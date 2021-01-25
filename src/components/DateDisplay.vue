@@ -83,7 +83,7 @@ export default {
 .body {
   margin: none;
   /* width: 100%; */
-  /* height: 100px; */
+  height: 100px;
 
   border-bottom: 1px solid rgba(7, 7, 7, 0.1);
 }

@@ -14,9 +14,9 @@
         </label>
       </div>
       <div class="list-title">{{ listTitle }}</div>
-      <button class="button is-small" id="delete-button" v-on:click="deactivateList(listId)">
+      <!-- <button class="button is-small" id="delete-button" v-on:click="deactivateList(listId)">
         <font-awesome-icon id="icon" :icon="['fas', 'trash']" />
-      </button>
+      </button>-->
     </div>
   </li>
 </template>
@@ -57,13 +57,14 @@ export default {
   width: 100%;
   display: flex;
   padding-bottom: 20px;
+  margin-left: 10px;
   /* background-color: aqua; */
 }
 
 .checkmark {
   width: 15px;
   height: 15px;
-  margin-top: 4px;
+  /* margin-top: 4px; */
   background-color: white;
   border-radius: 50%;
   vertical-align: middle;
@@ -79,17 +80,7 @@ export default {
 
 .list-title {
   padding-left: 15px;
-}
-
-#delete-button {
-  margin-right: 1px;
-  color: $primary;
-  opacity: 0.5;
-  margin-top: -3px;
-}
-
-#delete-button:hover {
-  color: $primary;
+  font-size: 14px;
 }
 
 .button {

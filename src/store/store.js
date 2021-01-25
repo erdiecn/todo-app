@@ -240,9 +240,24 @@ export const store = new Vuex.Store({
       state.lists = newLists;
     },
     deleteList: (state, listId) => {
+      console.log("old filter", state.filterLists);
       const newLists = state.lists.filter(list => list.id != listId);
+      const newFilterLists = state.filterLists.filter(
+        list => list.id != listId
+      );
+      const newPersonalLists = state.personalFilterLists.filter(
+        list => list.id != listId
+      );
+      const newClassLists = state.classFilterLists.filter(
+        list => list.id != listId
+      );
+
       state.lists = newLists;
+      state.filterLists = newFilterLists;
+      state.personalFilterLists = newPersonalLists;
+      state.classFilterLists = newClassLists;
       console.log("delete", newLists); /// this works to remove lists
+      console.log("new filter", newFilterLists);
     },
 
     addCheckedLists: (state, listId) => {

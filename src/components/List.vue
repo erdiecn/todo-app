@@ -5,6 +5,9 @@
         <h1 class="list-title">
           <strong>{{ listTitle }}</strong>
         </h1>
+        <button class="button is-small" id="delete-button" v-on:click="deactivateList(listId)">
+          <font-awesome-icon id="icon" :icon="['fas', 'trash']" />
+        </button>
       </div>
       <div class="content">
         <div>
@@ -51,7 +54,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+@import "../assets/main.scss";
 .container {
   padding-left: 20px;
 }
@@ -60,6 +64,11 @@ export default {
   display: flex;
   margin-bottom: 30px;
   margin-top: 30px;
+}
+
+#delete-button {
+  padding-top: 40px;
+  /* color: $primary; */
 }
 
 .button {

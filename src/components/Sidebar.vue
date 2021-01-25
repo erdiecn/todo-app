@@ -1,13 +1,12 @@
 <template>
   <div class="body">
-    <DateDisplay class="date" />
     <aside class="menu">
-      <router-link to="/completed">
+      <!-- <router-link to="/completed">
         <div class="menu-label" id="completed">
           <font-awesome-icon :icon="['fas', 'check']" class="icon" id="icon-green" />
           <p>Completed Items</p>
         </div>
-      </router-link>
+      </router-link>-->
       <!-- <div class="menu-label" id="priority">
         <font-awesome-icon :icon="['fas', 'bookmark']" class="icon" id="icon-purple" />
         <p>Priority</p>
@@ -41,7 +40,9 @@
           :listId="list.id"
           :listTitle="list.title"
         />
+        <AddList id="add-list" />
       </ul>
+
       <router-link to="/sort" v-on:click.native="filterLists">
         <div>
           <button class="button is-primary">
@@ -50,19 +51,13 @@
           </button>
         </div>
       </router-link>
-      <router-link to="/add">
-        <button class="button is-primary">
-          <font-awesome-icon :icon="['fas', 'plus']" class="icon-button" />
-          <p id="button-text">Add List</p>
-        </button>
-      </router-link>
     </aside>
   </div>
 </template>
 
 <script>
 import MenuItem from "./MenuItem";
-import DateDisplay from "../components/DateDisplay";
+import AddList from "./AddList";
 // import func from "../../vue-temp/vue-editor-bridge";
 
 export default {
@@ -77,7 +72,7 @@ export default {
 
   components: {
     MenuItem,
-    DateDisplay
+    AddList
   },
 
   mounted() {
@@ -149,7 +144,7 @@ export default {
 }
 
 .date {
-  height: 100px;
+  /* height: 100px; */
   /* background-color: #fdf8ef; */
   margin-left: -10px;
   width: 20vw;
@@ -194,5 +189,10 @@ p {
 
 #all-lists {
   margin-top: -15px;
+}
+
+#add-list {
+  margin-left: -15px;
+  margin-top: -50px;
 }
 </style>

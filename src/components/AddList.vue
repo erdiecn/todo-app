@@ -1,14 +1,13 @@
 <template>
   <section class="section">
-    <div class="columns">
-      <div class="column"></div>
+    <div class="field is-grouped">
+      <font-awesome-icon :icon="['fas', 'plus']" class="icon" />
       <input
-        class="input is-primary column is-two-thirds"
+        class="input is-small"
         v-model="newList"
         placeholder="Add new TodoList!"
         v-on:keyup.enter.prevent="getNewList()"
       />
-      <button class="button is-primary column" v-on:click="getNewList()">Submit</button>
     </div>
   </section>
 </template>
@@ -40,8 +39,8 @@ export default {
 
   width: 100%;
 }
-
-button {
-  margin-left: 20px;
+.icon {
+  margin-right: 5px;
+  margin-top: 3px;
 }
 </style>
