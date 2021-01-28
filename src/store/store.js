@@ -5,19 +5,81 @@ import axios from "axios";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  state: { lists: [], loading: true },
+  state: {
+    lists: [],
+    loading: true,
+    checkedLists: [],
+    filterLists: [],
+    completedItems: [],
+    classFilterLists: [],
+    personalFilterLists: [],
+    user_id: 1
+  },
 
   getters: {
     allLists: state => state.lists,
-    isLoading: state => state.loading
+    isLoading: state => state.loading,
+    checkedLists: state => state.checkedLists,
+    filterLists: state => state.filterLists,
+    classFilterLists: state => state.classFilterLists,
+    personalFilterLists: state => state.personalFilterLists,
+    completedItems: state => state.completedItems
   },
 
   actions: {
+    async login() {
+      try {
+        const result = await axios.post(
+          "http://localhost:3000/user/login",
+          { user_id: 1 },
+          { withCredentials: true }
+        );
+        console.log(result, "login result"); //// this needs to stay
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    /// go to the api
     async fetchLists({ commit }) {
       try {
-        const result = await axios.get("http://localhost:3000/lists");
+        const result = await axios.get("http://localhost:3000/lists", {
+          withCredentials: true
+        });
         commit("setLists", result.data.lists);
         commit("setLoaded");
+
+        // console.log("fetch", result.data.lists);
+        // console.log("stats", this.state.lists);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    ///fetch lists, filter by class
+    async fetchClassLists({ commit }) {
+      try {
+        const result = await axios.get("http://localhost:3000/lists", {
+          withCredentials: true
+        });
+        const classResult = result.data.lists.filter(function(list) {
+          return list.class_id != null;
+        });
+        commit("filterClassLists", classResult);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async fetchPersonalLists({ commit }) {
+      try {
+        const result = await axios.get("http://localhost:3000/lists", {
+          withCredentials: true
+        });
+        const personalResult = result.data.lists.filter(function(list) {
+          return list.class_id == null;
+        });
+        commit("filterPersonalLists", personalResult);
       } catch (err) {
         console.log(err);
       }
@@ -25,9 +87,13 @@ export const store = new Vuex.Store({
 
     async addList({ commit }, newList) {
       try {
-        const result = await axios.post("http://localhost:3000/lists", {
-          title: newList
-        });
+        const result = await axios.post(
+          "http://localhost:3000/lists",
+          {
+            title: newList
+          },
+          { withCredentials: true }
+        );
         commit("addList", result.data.list);
       } catch (err) {
         console.log(err);
@@ -35,10 +101,14 @@ export const store = new Vuex.Store({
     },
     async addItem({ commit }, newItem) {
       try {
-        const result = await axios.post("http://localhost:3000/item", {
-          ...newItem
-        });
-        console.log(result.data, "post to items");
+        const result = await axios.post(
+          "http://localhost:3000/item",
+          {
+            ...newItem
+          },
+          { withCredentials: true }
+        );
+        // console.log(result.data, "post to items");
         commit("addItem", result.data.item);
       } catch (err) {
         console.log(err);
@@ -50,8 +120,12 @@ export const store = new Vuex.Store({
           complete: !itemComplete.complete,
           id: itemComplete.id
         };
-        const result = await axios.patch("http://localhost:3000/item", payload);
-        console.log(result.data, "patch complete status");
+        const result = await axios.patch(
+          "http://localhost:3000/item",
+          payload,
+          { withCredentials: true }
+        );
+        console.log(result.data, "patch complete status"); ///this needs to stay
         commit("completeItem", payload);
       } catch (err) {
         console.log(err);
@@ -61,9 +135,10 @@ export const store = new Vuex.Store({
     async deleteItem({ commit }, itemId) {
       try {
         const result = await axios.delete(
-          `http://localhost:3000/item/${itemId}`
+          `http://localhost:3000/item/${itemId}`,
+          { withCredentials: true }
         );
-        console.log("result", result);
+        console.log("result", result); ///this needs to stay
         commit("deleteItem", itemId);
       } catch (err) {
         console.log(err);
@@ -73,13 +148,34 @@ export const store = new Vuex.Store({
     async deleteList({ commit }, listId) {
       try {
         const result = await axios.delete(
-          `http://localhost:3000/lists/${listId}`
+          `http://localhost:3000/lists/${listId}1`,
+          { withCredentials: true }
         );
-        console.log("result", result);
+        console.log("result", result); /// this needs to stay
         commit("deleteList", listId);
       } catch (err) {
         console.log(err);
       }
+    },
+
+    updateFilterLists: (state, listId) => {
+      if (listId.checked) {
+        state.commit("addCheckedLists", listId);
+        // console.log("listId", listId);
+      } else {
+        state.commit("removeCheckedLists", listId);
+      }
+    },
+
+    filterLists: state => {
+      // console.log(state.state.checkedLists, "state"); /// this works
+      const result = state.state.lists.filter(list => {
+        const isChecked = state.state.checkedLists.includes(list.id);
+
+        return isChecked;
+      });
+      console.log(result, "the result");
+      state.commit("filteredLists", result);
     }
   },
 
@@ -87,6 +183,16 @@ export const store = new Vuex.Store({
     setLists: (state, lists) => (state.lists = lists),
 
     setLoaded: state => (state.loading = false),
+
+    filteredLists: (state, result) => (state.filterLists = result),
+
+    filterClassLists: (state, classResult) =>
+      (state.classFilterLists = classResult),
+
+    filterPersonalLists: (state, personalResult) =>
+      (state.personalFilterLists = personalResult),
+
+    // setFilter: state => ,
 
     addList: (state, list) => {
       state.lists = [...state.lists, list];
@@ -99,6 +205,8 @@ export const store = new Vuex.Store({
       state.lists[listKey].items.push({
         id: payload.id,
         text: payload.text,
+        personal: payload.personal,
+        due_date: payload.due_date,
         active: payload.active,
         complete: payload.complete,
         list_id: payload.list_id
@@ -111,13 +219,16 @@ export const store = new Vuex.Store({
           if (item.id == payload.id) {
             item.complete = payload.complete;
           }
+          console.log("completed", item);
           return item;
         });
         list.items = newItems;
+
         return list;
       });
       state.lists = newLists;
     },
+
     deleteItem: (state, itemId) => {
       const newLists = state.lists.map(list => {
         const newItems = list.items.filter(item => item.id != itemId);
@@ -127,8 +238,37 @@ export const store = new Vuex.Store({
       state.lists = newLists;
     },
     deleteList: (state, listId) => {
+      console.log("old filter", state.filterLists);
       const newLists = state.lists.filter(list => list.id != listId);
+      const newFilterLists = state.filterLists.filter(
+        list => list.id != listId
+      );
+      const newPersonalLists = state.personalFilterLists.filter(
+        list => list.id != listId
+      );
+      const newClassLists = state.classFilterLists.filter(
+        list => list.id != listId
+      );
+
       state.lists = newLists;
+      state.filterLists = newFilterLists;
+      state.personalFilterLists = newPersonalLists;
+      state.classFilterLists = newClassLists;
+      console.log("delete", newLists); /// this works to remove lists
+      console.log("new filter", newFilterLists);
+    },
+
+    addCheckedLists: (state, listId) => {
+      // console.log(listId, "addone");
+      state.checkedLists.push(parseInt(listId.value)); /// listId is passed with a value that equals the id os the clicked list title
+    },
+
+    removeCheckedLists: (state, listId) => {
+      // console.log("remove", state.checkedLists, "v", listId.value);
+
+      const result = state.checkedLists.filter(list => list !== listId.value); /// need to remove the clicked
+      state.checkedLists = result;
+      // console.log(result, "deletecheckedLists");
     }
   }
 });
