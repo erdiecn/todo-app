@@ -51,6 +51,12 @@
           </button>
         </div>
       </router-link>
+      <router-link to="/dataViz" >
+        <div class="menu-label" >
+          <font-awesome-icon :icon="['fas', 'chart-pie']" class="icon" id="icon-blue" />
+          <p>Data Visualization</p>
+        </div>
+      </router-link> 
     </aside>
   </div>
 </template>

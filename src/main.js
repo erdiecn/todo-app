@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard.vue";
 import SortLists from "./pages/sortLists.vue";
 import AddList from "./components/AddList.vue";
 import CompletedItems from "./pages/CompletedItems.vue";
+import DataViz from "./pages/DataViz.vue";
 import "bulma/css/bulma.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -19,6 +20,7 @@ import { faCircle as farCircle } from "@fortawesome/free-regular-svg-icons";
 import { faTrash as fasTrash } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDown as fasAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faChartPie as fasChartPie } from "@fortawesome/free-solid-svg-icons";
 import VCalendar from "v-calendar";
 
 require("@/assets/main.scss");
@@ -32,7 +34,8 @@ library.add(
   fasBookmark,
   fasListUl,
   fasTrash,
-  fasAngleDown
+  fasAngleDown,
+  fasChartPie
 );
 
 Vue.use(VueRouter);
@@ -49,7 +52,8 @@ const routes = [
   { path: "/", component: Dashboard },
   { path: "/sort", name: "sort", component: SortLists },
   { path: "/add", name: "add", component: AddList },
-  { path: "/completed", name: "completed", component: CompletedItems }
+  { path: "/completed", name: "completed", component: CompletedItems },
+  { path: "/dataViz", name: "dataViz", component: DataViz }
 ];
 
 const router = new VueRouter({

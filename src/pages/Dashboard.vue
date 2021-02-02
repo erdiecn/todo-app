@@ -78,7 +78,7 @@ export default {
   components: {
     AddList,
     ListItemWholeview,
-    AddListItem
+    AddListItem,
   },
   data() {
     return {
