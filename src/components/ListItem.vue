@@ -4,12 +4,12 @@
       <font-awesome-icon id="icon" :icon="['far', 'circle']" v-if="itemComplete == false" />
       <font-awesome-icon id="icon" :icon="['far', 'check-circle']" v-else />
     </button>
-    <div class="column is-half" id="item-text">
+    <div class="column is-two-fifths" id="item-text">
       <p>{{ itemText }}</p>
     </div>
 
     <!-- use bluma columns to fix the layout -->
-    <div class="column">
+    <div class="column is-two-fifths">
       <p id="due-date">
         Due on
         <strong>{{ itemDueDate | moment }}</strong>
@@ -88,7 +88,8 @@ export default {
 #delete-button {
   margin-right: 0;
   margin-top: -5px;
-  color: $primary;
+  // color: $primary;
+  color: #000;
 }
 #complete-button {
   right: 0;
@@ -108,8 +109,7 @@ export default {
 
 .is-complete {
   text-decoration: line-through;
-  /* background-color: brown; */
-  /* background-color: lightgreen; */
+  background-color: lightgreen;
 }
 
 #icon {

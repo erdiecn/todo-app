@@ -7,6 +7,7 @@
             <h1 class="title">Oh no, you don't have any lists yet!</h1>
             <img src="../assets/undraw_Up_to_date_re_nqid.svg" />
             <h2 class="subtitle">Add your first list here or click the add list button</h2>
+            <!-- <label>List Title</label> -->
             <AddList />
           </div>
         </div>
@@ -37,15 +38,27 @@
       <div>
         <AddListItem v-show="isModalVisible" @close="closeModal" :listId="listId" />
       </div>
-      <div>
+      <span>
         <button
           type="inputs"
           class="button is-primary is-small"
           id="modal-button"
           @click="showModal"
-        >
-          <font-awesome-icon id="icon" :icon="['fas', 'plus']" />Add a New Task!
+        > Add Item
+          <!-- <font-awesome-icon id="icon" :icon="['fas', 'plus']" /> -->
         </button>
+      </span>
+      <div v-show="showSuccess" class="notification is-success is-light" id="success">
+        <button class="delete" @click="closeButton"></button>
+        <strong> Form Completed </strong>
+        <br>
+        You have added a new item.
+      </div>
+      <div v-show="showDelete" class="notification is-danger is-light" id="delete">
+        <button class="delete" @click="closeButton" ></button>
+        <strong> You deleted an item </strong>
+        <br>
+        You will no longer see this item in the list
       </div>
       <div
         class="container"
@@ -54,6 +67,7 @@
         :key="list.id"
       >
         <ListItemWholeview
+          @delete="openDelete"
           v-for="item in list.items"
           :key="`item-${item.id}`"
           :itemId="item.id"
@@ -83,7 +97,9 @@ export default {
   data() {
     return {
       isModalVisible: false,
-      listId: []
+      listId: [],
+      showSuccess: false,
+      showDelete: false,
     };
   },
   methods: {
@@ -96,6 +112,26 @@ export default {
       this.isModalVisible = false;
       var x = document.getElementById("modal-button");
       x.style.display = "block";
+      this.showSuccess = true;
+    },
+    openDelete() {
+      this.showDelete = true;
+    },
+    closeButton() {
+      this.showSuccess = false;
+      this.showDelete = false;
+    }
+  
+  },
+  computed: {
+    sortedList(){
+      const allLists = this.$store.getters.allLists;
+      allLists.forEach(e => {
+        e.items = e.items.sort((a,b) => {
+          return a.due_date < b.due_date
+        })
+      });
+      return allLists;
     }
   }
 };
@@ -135,7 +171,7 @@ img {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 28px;
   border-bottom: 1px;
   /* color: $primary !important; */
 }
@@ -152,8 +188,17 @@ h1 {
 }
 
 #modal-button {
-  margin-left: 25px;
-  width: 150px;
-  margin-top: 7px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  float: right;
+  height: 30px;
+  width: 95px;
+  margin-top: -40px;
+  background-color: #245791;
+}
+
+.notification{
+  margin-left: 15px;
 }
 </style>

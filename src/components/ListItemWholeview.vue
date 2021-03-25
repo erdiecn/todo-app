@@ -1,10 +1,12 @@
 <template>
+<div>
+  
   <div class="columns" id="list-item" v-bind:class="{ 'is-complete': itemComplete }">
     <button class="button is-small" id="complete-button" v-on:click="markComplete()">
       <font-awesome-icon id="icon" :icon="['far', 'circle']" v-if="itemComplete == false" />
       <font-awesome-icon id="icon" :icon="['far', 'check-circle']" v-else />
     </button>
-    <div class="column is-three-fifths">
+    <div class="column is-two-fifths itemtext">
       <p>{{ itemText }}</p>
       <p class="help">
         In list
@@ -13,7 +15,7 @@
     </div>
 
     <!-- use bluma columns to fix the layout -->
-    <div class="column">
+    <div class="column is-two-fifths">
       <p id="due-date">
         Due on
         <strong>{{ itemDueDate | moment }}</strong>
@@ -25,6 +27,7 @@
       </button>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -44,6 +47,7 @@ export default {
   methods: {
     deactivate: function(itemId) {
       this.$store.dispatch("deleteItem", itemId);
+      this.$emit("delete");
     },
 
     markComplete() {
@@ -72,9 +76,12 @@ export default {
 
 #list-item {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 14px;
   cursor: pointer;
+  box-shadow: 0px 2px 4px #00000029;
+  border: 1px solid #E6E6E7;
+  border-radius: 4px;
   /* background-color: aqua; */
 }
 
@@ -82,13 +89,21 @@ export default {
   vertical-align: middle;
 } */
 
+.itemtext {
+  align-content: center;
+  text-align: center;
+}
+
 #delete-button {
   margin-right: 0;
-  color: $primary;
+  // color: $primary;
+  color: #000;
+  margin-top: 5px;
 }
 #complete-button {
   right: 0;
-  margin-top: 7px;
+  margin-top: 18px;
+  margin-left: 20px;
   color: green;
 }
 .check-incomplete {
@@ -102,8 +117,8 @@ export default {
 
 .is-complete {
   text-decoration: line-through;
+  background-color: lightgreen;
   /* background-color: brown; */
-  /* background-color: lightgreen; */
 }
 
 #icon {

@@ -98,6 +98,17 @@ export default {
   /* color: chartreuse; */
 }
 
+#modal-button {
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  float: right;
+  height: 30px;
+  width: 130px;
+  // margin-top: -40px;
+  background-color: #245791;
+}
+
 img {
   width: 200px;
   margin: 20px;

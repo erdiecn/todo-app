@@ -16,13 +16,20 @@
           </div>
         </v-col>
         <v-col id="arc" />
+        <v-col id="arc2" />
+        
+      </v-row>
+      <v-row>
+        <canvas id="myChart" width="400" height="400"></canvas>
       </v-row>
     </v-container>
   </v-app>
+  
 </template>
 
 <script>
 import * as d3 from "d3";
+import Chart from 'chart.js';
 
 export default {
     name: "DataViz",
@@ -34,16 +41,71 @@ export default {
                 {country: "Germany", value: 4.0 },
                 {country: "Japan", value: 4.9 },
                 {country: "France", value: 2.8 }
+            ],
+            classes: [
+              {className: "Vue", x: 0, y:0, yes: 5, no: 3, slices:[5, 3]},
+              {className: "React", x: 0, y:200, yes: 9, no: 2, slices:[9, 2]},
+              {className: "RESTAPI", x: 0, y:400, yes: 3, no: 9, slices:[3, 9]},
+
             ]
         };
     },
     mounted() {
         this.generateArc();
+        this.chart();
     },
     methods: {
+      chart() {
+        var ctx = document.getElementById('myChart');
+        var myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: this.data.classes[0].slices
+        });
+        console.log(myDoughnutChart);
+      },
+
+
       generateArc() {
         const w = 500;
         const h = 500;
+
+        //Draw image
+        const svg2 = d3
+          .select("#arc2")
+          .append("svg")
+          .attr("width", w)
+          .attr("height", h)
+
+        //Scale
+        const completePie = d3.pie()
+          .value((d) => d)
+          .sort(null)
+
+        // const slices = completePie(this.classes)
+
+        // console.log('slices', slices);
+
+        const arc2 = d3.arc()
+          .outerRadius(w / 2)
+          .innerRadius(w / 2 - 50)
+
+        const color = d3.scaleOrdinal(d3.schemeDark2);
+
+        //Draw Shape
+        const pies = svg2.selectAll("g")
+          .data(this.classes)
+          .enter()
+          .append("g")
+          .property("radius", w / 2)
+          .attr("transform", d => `translate(${d.x},${d.y})`)
+
+        pies.selectAll()
+          .data(d => completePie(d.slices))
+          .append("path")
+          .attr("d", arc2)
+          .attr("fill", (d, i) => color(i))
+
+
 
         const svg = d3
             .select("#arc")
@@ -52,7 +114,7 @@ export default {
             .attr("height", h);
 
         const sortedGDP = this.gdp.sort((a, b) => (a.value > b.value ? 1 : -1));
-        const color = d3.scaleOrdinal(d3.schemeDark2);
+        
 
         const max_gdp = d3.max(sortedGDP, o => o.value);
 

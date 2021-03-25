@@ -16,7 +16,7 @@ $beige-lighter: #eff0eb;
 $burnt-orange: #bf5700;
 
 // Update Bulma's global variables
-$family-sans-serif: "Nunito", sans-serif;
+$family-sans-serif: "Lato", sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
 $primary: $burnt-orange;
@@ -27,8 +27,8 @@ $fullhd-enabled: false;
 // Update some of Bulma's component variables
 $body-background-color: white;
 $control-border-width: 2px;
-$input-border-color: transparent;
-$input-shadow: none;
+// $input-border-color: transparent;
+// $input-shadow: none;
 
 // Import only what you need from Bulma
 @import "~bulma";

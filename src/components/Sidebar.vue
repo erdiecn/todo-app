@@ -13,7 +13,7 @@
       </div>-->
       <router-link to="/">
         <div class="menu-label" id="all-lists">
-          <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" id="icon-blue" />
+          <font-awesome-icon :icon="['fas', 'list-ul']" class="icon"  />
           <p>All Items</p>
         </div>
       </router-link>
@@ -53,7 +53,7 @@
       </router-link>
       <router-link to="/dataViz" >
         <div class="menu-label" >
-          <font-awesome-icon :icon="['fas', 'chart-pie']" class="icon" id="icon-blue" />
+          <font-awesome-icon :icon="['fas', 'chart-pie']" class="icon" />
           <p>Data Visualization</p>
         </div>
       </router-link> 
@@ -122,20 +122,26 @@ export default {
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: #f5f6f7;
+  /* background-color: #f5f6f7; */
+  background-color: #1B1C1D;
 
   padding-top: 45px;
-  padding-left: 40px;
+  padding-left: 10px;
   width: 25vw;
-  color: rgb(51, 63, 72);
+  /* color: rgb(51, 63, 72); */
+  color: #FFFFFFCC;
   /* margin-top: 50px; */
 }
 .menu-label {
+  padding-left: 10px;
   display: flex;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: rgb(51, 63, 72);
+  /* color: rgb(51, 63, 72); */
+  color: #FFFFFFCC;
   font-size: 14px;
+  /* opacity: 0.39; */
+  background-color: rgba(75, 69, 69, 0.3);
 }
 
 .menu-list {
@@ -162,6 +168,7 @@ export default {
 
 p {
   margin-top: 3px;
+  
 }
 
 .icon {
