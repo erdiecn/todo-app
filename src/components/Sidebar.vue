@@ -13,7 +13,7 @@
       </div>-->
       <router-link to="/">
         <div class="menu-label" id="all-lists">
-          <font-awesome-icon :icon="['fas', 'list-ul']" class="icon"  />
+          <font-awesome-icon :icon="['fas', 'list-ul']" class="icon" />
           <p>All Items</p>
         </div>
       </router-link>
@@ -51,12 +51,12 @@
           </button>
         </div>
       </router-link>
-      <router-link to="/dataViz" >
-        <div class="menu-label" >
+      <router-link to="/dataViz">
+        <div class="menu-label">
           <font-awesome-icon :icon="['fas', 'chart-pie']" class="icon" />
           <p>Data Visualization</p>
         </div>
-      </router-link> 
+      </router-link>
     </aside>
   </div>
 </template>
@@ -123,13 +123,13 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: #f5f6f7; */
-  background-color: #1B1C1D;
+  background-color: #1b1c1d;
 
   padding-top: 45px;
   padding-left: 10px;
   width: 25vw;
   /* color: rgb(51, 63, 72); */
-  color: #FFFFFFCC;
+  color: #ffffffcc;
   /* margin-top: 50px; */
 }
 .menu-label {
@@ -138,7 +138,7 @@ export default {
   padding-top: 5px;
   padding-bottom: 5px;
   /* color: rgb(51, 63, 72); */
-  color: #FFFFFFCC;
+  color: #ffffffcc;
   font-size: 14px;
   /* opacity: 0.39; */
   background-color: rgba(75, 69, 69, 0.3);
@@ -147,12 +147,12 @@ export default {
 .menu-list {
   font-size: 19px;
   padding-bottom: 20px;
+  padding-left: 15px;
 }
 .button {
-  width: 90%;
-  align-self: flex-end;
+  width: 60%;
   background-color: rgb(51, 63, 72) !important;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .date {
@@ -168,7 +168,6 @@ export default {
 
 p {
   margin-top: 3px;
-  
 }
 
 .icon {

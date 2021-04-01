@@ -3,7 +3,7 @@
     <div class="field is-grouped">
       <font-awesome-icon :icon="['fas', 'plus']" class="icon" />
       <input
-        class="input is-small"
+        class="input is-normal"
         v-model="newList"
         placeholder="Add new TodoList!"
         v-on:keyup.enter.prevent="getNewList()"
